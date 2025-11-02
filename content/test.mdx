@@ -5,7 +5,11 @@ description: Components
 
 import { ImageCard } from "@/components/image-card";
 import { ImageCardGroup } from "@/components/image-card-group";
+import { MediaCard } from "@/components/media-card";
+import { MediaCardGroup } from "@/components/media-card-group";
 import { Callout } from "@/components/callout";
+
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 
 ## Code Block
 
@@ -43,3 +47,39 @@ console.log('Hello World');
     imageSrc="/dev-samples/3.webp"
   />
 </ImageCardGroup>
+
+<Tabs items={["Dark Mode", "Light Mode"]}>
+  <Tab value="Dark Mode">
+    <MediaCardGroup>
+      <MediaCard
+        description="How to deploy Umami analytics on Coolify"
+        imageSrc="/dev-samples/1.webp"
+      />
+      <MediaCard
+        description="How to Setup Backup for Umami Database"
+        imageSrc="/dev-samples/2.webp"
+      />
+      <MediaCard
+        description="How to restore Umami DB backup"
+        imageSrc="/dev-samples/3.webp"
+      />
+    </MediaCardGroup>
+  </Tab>  
+
+  <Tab value="Light Mode">
+    <MediaCardGroup>
+      <MediaCard
+        description="How to deploy Umami analytics on Coolify"
+        imageSrc="/dev-samples/1.webp"
+      />
+      <MediaCard
+        description="How to Setup Backup for Umami Database"
+        imageSrc="/dev-samples/2.webp"
+      />
+      <MediaCard
+        description="How to restore Umami DB backup"
+        imageSrc="/dev-samples/3.webp"
+      />
+    </MediaCardGroup>
+  </Tab>  
+</Tabs>  

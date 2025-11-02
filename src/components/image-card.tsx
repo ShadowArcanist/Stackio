@@ -1,6 +1,4 @@
-
 import { Card } from "fumadocs-ui/components/card";
-import Image from "next/image";
 
 interface ImageCardProps {
   title: string;
@@ -24,11 +22,9 @@ export function ImageCard({
         <a href={href} className="block no-underline text-inherit">
           <div className="flex flex-col">
             <div className="-mx-4 -mt-4 mb-4">
-              <Image
+              <img
                 src={imageSrc}
                 alt={imageAlt}
-                width={800}
-                height={400}
                 className="w-full h-auto object-cover rounded-t-xl"
               />
             </div>
