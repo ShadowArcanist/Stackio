@@ -8,6 +8,8 @@ import {
   ChangelogItemVersion,
 } from "@/components/changelog";
 
+import Details from "@/components/details";
+
 export function getMDXComponents(components?: MDXComponents): MDXComponents {
   return {
     ...defaultMdxComponents,
@@ -17,5 +19,7 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
     ChangelogItemDescription,
     ChangelogItemVersion,
     ...components,
+    Details: (props) => <Details {...props} />,
+    Detail: (props) => <Details.Detail {...props} />,
   };
 }

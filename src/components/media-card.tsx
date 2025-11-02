@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
 import { Card } from "fumadocs-ui/components/card";
-import { ImageZoom } from "fumadocs-ui/components/image-zoom"; 
+import { ImageZoom } from "fumadocs-ui/components/image-zoom";
 
 interface MediaCardProps {
   description: string;
@@ -20,6 +20,7 @@ export function MediaCard({
         <div className="flex flex-col">
           <div className="-mx-4 -mt-4 mb-4">
             <ImageZoom src={imageSrc} alt={imageAlt}>
+              {/* biome-ignore lint/performance/noImgElement: static export */}
               <img
                 src={imageSrc}
                 alt={imageAlt}

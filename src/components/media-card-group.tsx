@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 
 interface MediaCardGroupProps {
   children: ReactNode;
@@ -6,8 +6,6 @@ interface MediaCardGroupProps {
 
 export function MediaCardGroup({ children }: MediaCardGroupProps) {
   return (
-    <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 mt-5">
-      {children}
-    </div>
+    <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 mt-5">{children}</div>
   );
 }

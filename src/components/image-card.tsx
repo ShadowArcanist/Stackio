@@ -22,6 +22,7 @@ export function ImageCard({
         <a href={href} className="block no-underline text-inherit">
           <div className="flex flex-col">
             <div className="-mx-4 -mt-4 mb-4">
+              {/* biome-ignore lint/performance/noImgElement: static export */}
               <img
                 src={imageSrc}
                 alt={imageAlt}
