@@ -34,7 +34,8 @@ export default async function Page(props: PageProps<'/[[...slug]]'>) {
 }
 
 export async function generateStaticParams() {
-  return source.generateParams();
+  const params = source.generateParams();
+  return [{ slug: [] }, ...params];
 }
 
 export async function generateMetadata(
