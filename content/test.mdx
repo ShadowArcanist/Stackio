@@ -3,6 +3,10 @@ title: Components
 description: Components
 ---
 
+import { ImageCard } from "@/components/image-card";
+import { ImageCardGroup } from "@/components/image-card-group";
+import { Callout } from "@/components/callout";
+
 ## Code Block
 
 ```js
@@ -15,3 +19,27 @@ console.log('Hello World');
   <Card title="Learn more about Next.js" href="https://nextjs.org/docs" />
   <Card title="Learn more about Fumadocs" href="https://fumadocs.dev" />
 </Cards>
+
+<Callout type="tip" title="Availability">Testing **Callouts**</Callout>
+
+
+<ImageCardGroup>
+  <ImageCard
+    title="ShadowArcanist"
+    description="How to deploy Umami analytics on Coolify"
+    href="/service"
+    imageSrc="/dev-samples/1.webp"
+  />
+  <ImageCard
+    title="Airoflare"
+    description="How to Setup Backup for Umami Database"
+    href="/package-managers/javascript/pnpm"
+    imageSrc="/dev-samples/2.webp"
+  />
+  <ImageCard
+    title="ShadowArcanist"
+    description="How to restore Umami DB backup"
+    href="/package-managers/javascript/npm"
+    imageSrc="/dev-samples/3.webp"
+  />
+</ImageCardGroup>
