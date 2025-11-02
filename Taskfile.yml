@@ -19,8 +19,6 @@ tasks:
       - |
         bash -c "
           set -e
-          cd apps/site
-
           # Install dependencies
           bun install
 
