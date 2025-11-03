@@ -23,35 +23,33 @@ export function AppData({
     <Card
       className="transition w-full"
       title={
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            {/* biome-ignore lint/performance/noImgElement: static export */}
-            <img
-              src={imageSrc}
-              alt={imageAlt}
-              className="w-10 h-10 object-cover rounded-full"
-            />
-            <div className="text-xl font-medium">{title}</div>
-          </div>
-          <div className="hidden sm:flex gap-2">
-            <a href={githubHref} target="_blank" rel="noopener noreferrer">
-              <Button size="sm" variant={"secondary"}>
-                <Github className="w-4 h-4 mr-1" />
-                GitHub
-              </Button>
-            </a>
-            <a href={websiteHref} target="_blank" rel="noopener noreferrer">
-              <Button size="sm" variant={"secondary"}>
-                <Globe className="w-4 h-4 mr-1" />
-                Website
-              </Button>
-            </a>
-          </div>
-        </div>
-      }
-      description={
         <div>
-          <div className="ml-14 mt-1 text-sm mb-2">{description}</div>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              {/* biome-ignore lint/performance/noImgElement: static export */}
+              <img
+                src={imageSrc}
+                alt={imageAlt}
+                className="w-10 h-10 object-cover rounded-full"
+              />
+              <div className="text-xl font-medium">{title}</div>
+            </div>
+            <div className="hidden sm:flex gap-2">
+              <a href={githubHref} target="_blank" rel="noopener noreferrer">
+                <Button size="sm" variant={"secondary"}>
+                  <Github className="w-4 h-4 mr-1" />
+                  GitHub
+                </Button>
+              </a>
+              <a href={websiteHref} target="_blank" rel="noopener noreferrer">
+                <Button size="sm" variant={"secondary"}>
+                  <Globe className="w-4 h-4 mr-1" />
+                  Website
+                </Button>
+              </a>
+            </div>
+          </div>
+          <div className="ml-14 mt-1 text-sm text-fd-muted-foreground mb-2">{description}</div>
           <div className="flex justify-end gap-2 mt-4 sm:hidden">
             <a href={githubHref} target="_blank" rel="noopener noreferrer">
               <Button size="sm" variant={"secondary"}>
