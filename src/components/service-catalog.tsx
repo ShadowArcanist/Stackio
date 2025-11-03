@@ -55,7 +55,10 @@ const ServiceCatalog = ({ services, categories }: ServiceCatalogProps) => {
       regex.test(part) ? (
         <mark
           key={i}
-          style={{ backgroundColor: "var(--color-fd-primary)", color: "white" }}
+          style={{
+            backgroundColor: "var(--color-fd-primary)",
+            color: "var(--color-fd-card)",
+          }}
         >
           {part}
         </mark>
@@ -93,18 +96,18 @@ const ServiceCatalog = ({ services, categories }: ServiceCatalogProps) => {
   return (
     <div>
       <div className="flex flex-col md:flex-row gap-4 mb-4 items-center">
-        <div className="relative flex-grow w-full">
+        <div className="relative grow w-full">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-4 h-4" />
           <input
             type="text"
-            placeholder="Search by name or description"
+            placeholder="Search apps by name or description"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="w-full p-2 pl-9 border border-fd-border rounded-lg bg-fd-secondary text-fd-foreground text-sm h-[42px]"
           />
         </div>
         <div
-          className="relative flex-grow md:flex-grow-0 w-full md:w-auto"
+          className="relative grow md:grow-0 w-full md:w-auto"
           ref={dropdownRef}
         >
           <button
