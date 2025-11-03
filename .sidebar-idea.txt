@@ -1,0 +1,165 @@
+## 🌐 **Sidebar – Refined Version**
+
+### ☁️ **Applications**
+
+* Analytics
+* Automation
+* Archiving
+* Games
+* Internet Tools
+* Office Suites
+* Password Managers
+* Pastebins
+* Productivity
+
+  * Project Management
+  * Task Management
+  * Time Tracking
+* Miscellaneous
+
+---
+
+### 💡 **Information & Knowledge**
+
+* Bookmark Managers
+* Diagramming & Canvas
+* RSS Readers
+* Knowledge Management
+* Note-Taking & Editors
+
+---
+
+### 👾 **Media**
+
+* Audio & Music Servers
+* Podcasting
+* Document Management
+* E-Books
+* Media Servers
+* Photo Management
+* Image Hosting
+* Video Tools
+
+  * *arr Suite
+  * Video Downloaders
+  * Video Streaming
+
+---
+
+### 🏠 **Life & Home**
+
+* Budgeting & Finance
+* Internet of Things (IoT)
+* Inventory Management
+* Maps & GPS
+* Recipe Management
+* Video Surveillance
+
+---
+
+### 💬 **Communication**
+
+* Custom Communication Systems
+* Email
+
+  * Mailing Lists & Newsletters
+  * Servers
+  * Webmail Clients
+* IRC
+* Notifications
+* Social Networks & Forums
+* Video Conferencing
+* XMPP
+
+---
+
+### 🗂️ **File Management**
+
+* Cloud Storage
+* Object Storage & File Servers
+* Torrenting
+* File Downloaders
+* File Synchronization
+* File Transfer
+
+  * Single-Click & Drag-n-Drop Upload
+  * Web-Based File Managers
+* FTP & SFTP
+
+---
+
+### 💻 **Networking**
+
+* DNS
+* Firewalls
+* IP & Domain Management
+* Network Monitoring
+* Proxies
+* Remote Access
+* Reverse Proxy
+* Speed Testing
+* VPN
+
+  * Traditional VPN
+  * Mesh Networking
+
+---
+
+### ⚙️ **Sysadmin & Infrastructure**
+
+* Backup Solutions
+* Container Management
+* Databases
+
+  * Database Backup
+  * Database Management
+* Dashboards & Portals
+* Self-Hosting Platforms
+* Single Sign-On (SSO)
+* System Monitoring
+* Virtual Browsers
+* Virtual Machines & Systems
+* Web Servers
+
+---
+
+### 📔 **Publication & Content**
+
+* Blogging Platforms
+* CMS
+* Documentation
+* Static Site Generators
+* URL Shorteners
+* Wikis
+
+---
+
+### 💹 **Business & Commerce**
+
+* Booking & Scheduling
+* E-Commerce
+* Polls & Events
+* Ticketing Systems
+
+---
+
+### 💨 **Software Development**
+
+* API Management
+* CI / CD
+* Git Servers
+* IDEs & Development Tools
+* Localization
+* Low-Code Platforms
+* PaaS & Hosting
+* Search Solutions
+
+---
+
+### 🔥 **Artificial Intelligence**
+
+* Chatbot Interfaces
+* AI Search Engines
+* AI Tools & Templates
+* Model Management
+* AI Workflow Automation
