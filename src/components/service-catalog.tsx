@@ -103,14 +103,19 @@ const ServiceCatalog = ({ services, categories }: ServiceCatalogProps) => {
             className="w-full p-2 pl-9 border border-fd-border rounded-lg bg-fd-secondary text-fd-foreground text-sm h-[42px]"
           />
         </div>
-        <div className="relative" ref={dropdownRef}>
+        <div
+          className="relative flex-grow md:flex-grow-0 w-full md:w-auto"
+          ref={dropdownRef}
+        >
           <button
             onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-            className="w-full md:w-auto flex items-center justify-between gap-2 p-2 border rounded-lg  border-fd-border  bg-fd-secondary text-fd-foreground text-sm h-[42px]"
+            className="w-full md:w-auto flex items-center justify-between gap-2 p-2 border border-fd-border rounded-lg bg-fd-secondary text-fd-foreground text-sm h-[42px]"
           >
-            <div className="flex items-center gap-2 px-2">
-              <Filter className="left-3 top-1/2  text-gray-400 w-4 h-4" />
-              <span className="whitespace-nowrap">{getFilterButtonText()}</span>
+            <div className="flex items-center gap-2 md:px-2">
+              <Filter className="text-gray-400 w-4 h-4" />
+              <span className="whitespace-nowrap text-left">
+                {getFilterButtonText()}
+              </span>
             </div>
           </button>
           {isDropdownOpen && (
