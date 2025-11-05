@@ -9,16 +9,11 @@
 .light {
   --color-fd-card: var(--color-neutral-50);
   --color-fd-background: var(--color-fd-background);
-
-  #nd-sidebar {
-    a[data-active="true"] {
-      background-color: var(--color-neutral-200);
-    }
-  }
-
-  #nd-sidebar-mobile,
-  #nd-tocnav,
-  #nd-subnav {
-    background: var(--color-white);
-  }
+  --color-fd-primary: oklch(68.1% .162 75.834);
 }
+
+
+.dark {
+  --color-fd-primary: hsl(54, 100%, 76%);
+}
+
