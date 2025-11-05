@@ -1,9 +1,9 @@
 "use client";
 
-import { useState, useMemo, ReactNode, useEffect, useRef } from "react";
+import { CheckCircle, Filter, Search } from "lucide-react";
+import { type ReactNode, useEffect, useMemo, useRef, useState } from "react";
 import { ImageCard } from "@/components/image-card";
 import { ImageCardGroup } from "@/components/image-card-group";
-import { Search, Filter, CheckCircle, Plus } from "lucide-react";
 
 interface Service {
   title: string;
@@ -51,10 +51,11 @@ const ServiceCatalog = ({ services, categories }: ServiceCatalogProps) => {
   const highlight = (text: string): ReactNode => {
     if (!searchQuery) return text;
     const regex = new RegExp(`(${searchQuery})`, "gi");
-    return text.split(regex).map((part, i) =>
+    let keyCounter = 0;
+    return text.split(regex).map((part) =>
       regex.test(part) ? (
         <mark
-          key={i}
+          key={`highlight-${keyCounter++}`}
           style={{
             backgroundColor: "var(--color-fd-primary)",
             color: "var(--color-fd-card)",
@@ -63,7 +64,7 @@ const ServiceCatalog = ({ services, categories }: ServiceCatalogProps) => {
           {part}
         </mark>
       ) : (
-        part
+        <span key={`text-${keyCounter++}`}>{part}</span>
       ),
     );
   };
@@ -111,6 +112,7 @@ const ServiceCatalog = ({ services, categories }: ServiceCatalogProps) => {
           ref={dropdownRef}
         >
           <button
+            type="button"
             onClick={() => setIsDropdownOpen(!isDropdownOpen)}
             className="w-full md:w-auto flex items-center justify-between gap-2 p-2 border border-fd-border rounded-lg bg-fd-secondary text-fd-foreground text-sm h-[42px]"
           >
@@ -123,8 +125,9 @@ const ServiceCatalog = ({ services, categories }: ServiceCatalogProps) => {
           </button>
           {isDropdownOpen && (
             <div className="absolute top-full mt-2 w-max min-w-full p-2 border rounded-lg bg-fd-popover shadow-lg z-10">
-              <div
-                className="flex items-center gap-3 p-2 cursor-pointer hover:bg-fd-muted"
+              <button
+                type="button"
+                className="flex items-center gap-3 p-2 cursor-pointer hover:bg-fd-muted w-full text-left"
                 onClick={() => handleCategoryChange("all")}
               >
                 <div
@@ -134,12 +137,13 @@ const ServiceCatalog = ({ services, categories }: ServiceCatalogProps) => {
                     <CheckCircle className="w-3 h-3 text-white" />
                   )}
                 </div>
-                <label className="cursor-pointer text-sm">All Categories</label>
-              </div>
+                <span className="text-sm">All Categories</span>
+              </button>
               {categories.map((category) => (
-                <div
+                <button
                   key={category}
-                  className="flex items-center gap-3 p-2 cursor-pointer hover:bg-fd-muted"
+                  type="button"
+                  className="flex items-center gap-3 p-2 cursor-pointer hover:bg-fd-muted w-full text-left"
                   onClick={() => handleCategoryChange(category)}
                 >
                   <div
@@ -149,10 +153,8 @@ const ServiceCatalog = ({ services, categories }: ServiceCatalogProps) => {
                       <CheckCircle className="w-3 h-3 text-white" />
                     )}
                   </div>
-                  <label htmlFor={category} className="cursor-pointer text-sm">
-                    {category}
-                  </label>
-                </div>
+                  <span className="text-sm">{category}</span>
+                </button>
               ))}
             </div>
           )}

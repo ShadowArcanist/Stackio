@@ -49,7 +49,9 @@ export function AppData({
               </a>
             </div>
           </div>
-          <div className="ml-14 mt-1 text-sm text-fd-muted-foreground mb-2">{description}</div>
+          <div className="ml-14 mt-1 text-sm text-fd-muted-foreground mb-2">
+            {description}
+          </div>
           <div className="flex justify-end gap-2 mt-4 sm:hidden">
             <a href={githubHref} target="_blank" rel="noopener noreferrer">
               <Button size="sm" variant={"secondary"}>

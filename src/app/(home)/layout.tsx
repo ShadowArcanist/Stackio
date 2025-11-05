@@ -31,7 +31,11 @@ function docsOptions(): DocsLayoutProps {
 
 export default function Layout({ children }: LayoutProps<"/">) {
   return (
-    <DocsLayout {...docsOptions()} tabMode="navbar">
+    <DocsLayout
+      {...docsOptions()}
+      tabMode="navbar"
+      themeSwitch={{ mode: "light-dark" }}
+    >
       {children}
     </DocsLayout>
   );

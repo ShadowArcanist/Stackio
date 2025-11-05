@@ -1,165 +1,172 @@
-## 🌐 **Sidebar – Refined Version**
 
-### ☁️ **Applications**
+## 🧭 Master Category Structure for Self-Hostable Apps
 
-* Analytics
-* Automation
-* Archiving
-* Games
-* Internet Tools
-* Office Suites
-* Password Managers
-* Pastebins
-* Productivity
+### 1. **AI & Machine Learning**
 
-  * Project Management
-  * Task Management
-  * Time Tracking
-* Miscellaneous
+* Chatbots (e.g. Open WebUI, AnythingLLM)
+* LLM APIs & Backends (e.g. Ollama, LocalAI)
+* AI Image Generation (e.g. Stable Diffusion WebUI, ComfyUI)
+* AI Voice / TTS (e.g. Piper, Whisper)
+* AI Automation / Agents (e.g. AutoGPT, CrewAI)
+* AI Knowledge Bases (e.g. AnythingLLM, PrivateGPT)
+* AI Coding Assistants (e.g. CodeGPT, Tabby)
 
 ---
 
-### 💡 **Information & Knowledge**
+### 2. **Development & DevOps**
 
-* Bookmark Managers
-* Diagramming & Canvas
-* RSS Readers
-* Knowledge Management
-* Note-Taking & Editors
-
----
-
-### 👾 **Media**
-
-* Audio & Music Servers
-* Podcasting
-* Document Management
-* E-Books
-* Media Servers
-* Photo Management
-* Image Hosting
-* Video Tools
-
-  * *arr Suite
-  * Video Downloaders
-  * Video Streaming
+* Source Control (e.g. Gitea, GitLab)
+* CI/CD (e.g. Woodpecker CI, Drone)
+* Container Management (e.g. Portainer, Yacht, Dockge)
+* Reverse Proxies / Load Balancers (e.g. Traefik, Nginx Proxy Manager)
+* API Gateways (e.g. Kong, Tyk)
+* Package Registries (e.g. Verdaccio, Nexus)
+* Code Quality / Static Analysis (e.g. SonarQube)
+* Documentation Servers (e.g. Docsify, MkDocs)
 
 ---
 
-### 🏠 **Life & Home**
+### 3. **Monitoring & Observability**
 
-* Budgeting & Finance
-* Internet of Things (IoT)
-* Inventory Management
-* Maps & GPS
-* Recipe Management
-* Video Surveillance
-
----
-
-### 💬 **Communication**
-
-* Custom Communication Systems
-* Email
-
-  * Mailing Lists & Newsletters
-  * Servers
-  * Webmail Clients
-* IRC
-* Notifications
-* Social Networks & Forums
-* Video Conferencing
-* XMPP
+* Server Monitoring (e.g. Netdata, Glances)
+* Website / Uptime Monitoring (e.g. Uptime Kuma, Statping)
+* Metrics Collection (e.g. Prometheus, VictoriaMetrics)
+* Log Management (e.g. Loki, Graylog)
+* Visualization Dashboards (e.g. Grafana)
+* Alerting / Notifications (e.g. Alertmanager)
+* Infrastructure Monitoring (e.g. Zabbix)
 
 ---
 
-### 🗂️ **File Management**
+### 4. **Networking & Infrastructure**
 
-* Cloud Storage
-* Object Storage & File Servers
-* Torrenting
-* File Downloaders
-* File Synchronization
-* File Transfer
-
-  * Single-Click & Drag-n-Drop Upload
-  * Web-Based File Managers
-* FTP & SFTP
+* DNS Management (e.g. Technitium DNS)
+* VPN & Tunneling (e.g. WireGuard, Outline)
+* Firewall / Security Gateways (e.g. OPNsense)
+* DHCP / PXE Servers (e.g. Pi-hole + DHCP)
+* Dynamic DNS (e.g. DDNS Updater)
+* Proxy / Caching (e.g. Squid, Privoxy)
 
 ---
 
-### 💻 **Networking**
+### 5. **Storage & Backup**
 
-* DNS
-* Firewalls
-* IP & Domain Management
-* Network Monitoring
-* Proxies
-* Remote Access
-* Reverse Proxy
-* Speed Testing
-* VPN
-
-  * Traditional VPN
-  * Mesh Networking
+* File Sync / Sharing (e.g. Nextcloud, Seafile)
+* Backup Solutions (e.g. Restic, Duplicati)
+* Snapshot Management (e.g. BorgServer)
+* Object Storage / S3-compatible (e.g. MinIO)
+* NAS Management (e.g. OpenMediaVault)
+* Cloud Drive Gateways (e.g. Rclone WebUI)
 
 ---
 
-### ⚙️ **Sysadmin & Infrastructure**
+### 6. **Media & Entertainment**
 
-* Backup Solutions
-* Container Management
-* Databases
-
-  * Database Backup
-  * Database Management
-* Dashboards & Portals
-* Self-Hosting Platforms
-* Single Sign-On (SSO)
-* System Monitoring
-* Virtual Browsers
-* Virtual Machines & Systems
-* Web Servers
+* Media Servers (e.g. Jellyfin, Plex, Emby)
+* Music Streaming (e.g. Navidrome, Airsonic)
+* Video Hosting (e.g. PeerTube)
+* Torrent Clients (e.g. qBittorrent, Transmission)
+* Media Automation (e.g. Sonarr, Radarr, Lidarr, Prowlarr)
+* Subtitles / Metadata (e.g. Bazarr)
+* E-book Libraries (e.g. Calibre Web)
+* Photo Galleries (e.g. Photoprism, Immich)
 
 ---
 
-### 📔 **Publication & Content**
+### 7. **Web & CMS**
 
-* Blogging Platforms
-* CMS
-* Documentation
-* Static Site Generators
-* URL Shorteners
-* Wikis
-
----
-
-### 💹 **Business & Commerce**
-
-* Booking & Scheduling
-* E-Commerce
-* Polls & Events
-* Ticketing Systems
+* Static Site Hosting (e.g. Caddy, Nginx)
+* CMS Platforms (e.g. WordPress, Ghost, Strapi)
+* Wiki / Knowledge Management (e.g. Wiki.js, BookStack)
+* Web Analytics (e.g. Plausible, Umami)
+* Forum / Community Platforms (e.g. Discourse, Flarum)
+* Comment Systems (e.g. Isso, Remark42)
 
 ---
 
-### 💨 **Software Development**
+### 8. **Collaboration & Communication**
 
-* API Management
-* CI / CD
-* Git Servers
-* IDEs & Development Tools
-* Localization
-* Low-Code Platforms
-* PaaS & Hosting
-* Search Solutions
+* Chat / Messaging (e.g. Matrix Synapse, Mattermost, Rocket.Chat)
+* Video Conferencing (e.g. Jitsi Meet, Nextcloud Talk)
+* Email Servers (e.g. Mailcow, Mailu)
+* Project Management (e.g. Plane, Focalboard)
+* Kanban Boards (e.g. Wekan)
+* Calendars / Contacts (e.g. Radicale, Nextcloud)
+* Collaborative Documents (e.g. HedgeDoc, Etherpad)
 
 ---
 
-### 🔥 **Artificial Intelligence**
+### 9. **Home Automation & IoT**
 
-* Chatbot Interfaces
-* AI Search Engines
-* AI Tools & Templates
-* Model Management
-* AI Workflow Automation
+* Smart Home Platforms (e.g. Home Assistant, OpenHAB)
+* IoT Dashboards (e.g. Node-RED, ThingsBoard)
+* Device Management (e.g. Zigbee2MQTT, ESPHome)
+* Sensor Data Collection (e.g. InfluxDB + Grafana)
+* Automation Rules Engines (e.g. n8n, Automatisch)
+
+---
+
+### 10. **No Code / Low Code**
+
+* Workflow Automation (e.g. n8n, Activepieces)
+* Database GUIs (e.g. NocoDB, Budibase)
+* App Builders (e.g. Appsmith, ToolJet)
+* Form Builders (e.g. Formbricks, OhMyForm)
+* API Builders (e.g. Directus)
+
+---
+
+### 11. **Security & Identity**
+
+* Password Managers (e.g. Vaultwarden, Bitwarden RS)
+* MFA / Authentication (e.g. Authelia, Keycloak)
+* Single Sign-On (e.g. Authentik)
+* Intrusion Detection (e.g. Wazuh)
+* File Encryption / Secrets Management (e.g. HashiCorp Vault)
+* Penetration Testing Tools (e.g. OWASP Juice Shop)
+
+---
+
+### 12. **Data & Databases**
+
+* Relational Databases (e.g. Postgres, MariaDB, MySQL)
+* NoSQL Databases (e.g. MongoDB, CouchDB)
+* Time-Series Databases (e.g. InfluxDB, TimescaleDB)
+* Search Engines (e.g. Meilisearch, Elasticsearch)
+* Database Admin Panels (e.g. Adminer, phpMyAdmin)
+* Caching Systems (e.g. Redis, Memcached)
+
+---
+
+### 13. **Business & Productivity**
+
+* CRM Systems (e.g. Monica, EspoCRM)
+* ERP Systems (e.g. ERPNext)
+* Accounting / Invoicing (e.g. Invoice Ninja)
+* HR / Time Tracking (e.g. Kimai)
+* Knowledge Bases (e.g. Outline)
+* Ticketing Systems (e.g. Zammad)
+
+---
+
+### 14. **Privacy & Security Tools**
+
+* Ad Blocking (e.g. Pi-hole, AdGuard Home)
+* VPN Servers (e.g. WireGuard, OpenVPN)
+* File Encryption Tools (e.g. Cryptee)
+* Safe Browsers / Filters (e.g. Privoxy)
+* Anti-Spam / Anti-Malware (e.g. Rspamd, ClamAV)
+
+---
+
+### 15. **Miscellaneous / Utilities**
+
+* URL Shorteners (e.g. Kutt, Shlink)
+* QR Code Generators (e.g. qrcp)
+* Notes & Journals (e.g. Joplin Server, Trilium)
+* Bookmark Managers (e.g. Linkding, Shaarli)
+* Dashboard / Launcher Pages (e.g. Homer, Flame, Heimdall)
+* File Upload / Transfer (e.g. FileBrowser, Transfer.sh)
+* Terminal / SSH Tools (e.g. ShellHub, Wetty)
+* Misc Tools (e.g. Whoogle, SearXNG, Paperless-ngx)
+

@@ -5,3 +5,20 @@
 .prose h2 {
   margin-bottom: 0.4em;
 }
+
+.light {
+  --color-fd-card: var(--color-neutral-50);
+  --color-fd-background: var(--color-fd-background);
+
+  #nd-sidebar {
+    a[data-active="true"] {
+      background-color: var(--color-neutral-200);
+    }
+  }
+
+  #nd-sidebar-mobile,
+  #nd-tocnav,
+  #nd-subnav {
+    background: var(--color-white);
+  }
+}
