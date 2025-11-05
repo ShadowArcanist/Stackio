@@ -1,4 +1,5 @@
 import { DocsLayout, type DocsLayoutProps } from "fumadocs-ui/layouts/notebook";
+import { BuyMeACoffeeInfo } from "@/components/buymeacoffee-info";
 import { DiscordInfo } from "@/components/discord-info";
 import { GithubInfo } from "@/components/github-info";
 import { baseOptions } from "@/lib/layout.shared";
@@ -9,6 +10,12 @@ function docsOptions(): DocsLayoutProps {
     ...baseOptions(),
     tree: source.pageTree,
     links: [
+      {
+        type: "custom",
+        children: (
+          <BuyMeACoffeeInfo username="shadowarcanist" className="lg:-mx-2 pr-4" />
+        ),
+      },
       {
         type: "custom",
         children: (
