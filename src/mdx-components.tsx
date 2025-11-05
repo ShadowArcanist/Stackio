@@ -8,11 +8,22 @@ import {
   ChangelogItemVersion,
 } from "@/components/changelog";
 
+import { ImageZoom } from 'fumadocs-ui/components/image-zoom';
+
 import Details from "@/components/details";
 
 export function getMDXComponents(components?: MDXComponents): MDXComponents {
   return {
     ...defaultMdxComponents,
+    img: ({ src, alt, width, height, ...props }) => (
+      <ImageZoom
+        src={src as string}
+        alt={alt as string}
+        width="1280"
+        height="720"
+        {...props}
+      />
+    ),
     Changelog,
     ChangelogItem,
     ChangelogItemTitle,
