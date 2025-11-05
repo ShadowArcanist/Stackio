@@ -12,7 +12,7 @@ import { Detail } from "@/components/details";
 import { AppData } from "@/components/app-data";
 import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 
-import { Cpu, Microchip, Database, ArrowUpDown, Cog, Radiation, CircleDashed, User, KeyRound, Link, BookMarked, Code, LifeBuoy } from "lucide-react";
+import { Cpu, Microchip, Database, ArrowUpDown, Cog, Radiation, CircleDashed, User, KeyRound, Link, BookMarked, Code, LifeBuoy, Globe, BookImage, Github } from "lucide-react";
 
 
 <AppData
@@ -136,3 +136,29 @@ console.log('Hello World');
   />
 </Tab>
 </Tabs>
+
+
+## Resources
+<Cards className="mt-5">
+  <Card
+    title="Website"
+    href="/coolify/troubleshooting/error-500-coolify-db/"
+    icon={<Globe />}
+    description="Official Website of ServiceName"
+  />
+
+  <Card
+    title="Documentation"
+    href="https://example.com"
+    icon={<BookImage />}
+    description="Official Documentation of ServiceName"
+  />
+
+  <Card
+    title="Github Repository"
+    href="https://github.com"
+    icon={<Github />}
+    description="Official Github Repository of ServiceName"
+  />
+
+</Cards>
