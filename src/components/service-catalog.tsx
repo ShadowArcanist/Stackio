@@ -178,6 +178,7 @@ const ServiceCatalog = ({ services, categories }: ServiceCatalogProps) => {
                   description={highlight(service.description)}
                   href={service.href}
                   imageSrc={service.imageSrc}
+                  imageAlt={service.title}
                 />
               ))}
             </ImageCardGroup>

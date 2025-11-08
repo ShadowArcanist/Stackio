@@ -9,11 +9,9 @@
 .light {
   --color-fd-card: var(--color-neutral-50);
   --color-fd-background: var(--color-fd-background);
-  --color-fd-primary: oklch(68.1% .162 75.834);
+  --color-fd-primary: oklch(68.1% 0.162 75.834);
 }
-
 
 .dark {
   --color-fd-primary: hsl(54, 100%, 76%);
 }
-

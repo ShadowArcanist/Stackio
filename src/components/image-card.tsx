@@ -1,8 +1,9 @@
 import { Card } from "fumadocs-ui/components/card";
+import type { ReactNode } from "react";
 
 interface ImageCardProps {
-  title: string;
-  description: string;
+  title: ReactNode;
+  description: ReactNode;
   href: string;
   imageSrc: string;
   imageAlt?: string;
@@ -13,7 +14,7 @@ export function ImageCard({
   description,
   href,
   imageSrc,
-  imageAlt = title,
+  imageAlt,
 }: ImageCardProps) {
   return (
     <Card
@@ -25,7 +26,7 @@ export function ImageCard({
               {/* biome-ignore lint/performance/noImgElement: static export */}
               <img
                 src={imageSrc}
-                alt={imageAlt}
+                alt={imageAlt || (typeof title === "string" ? title : "")}
                 className="w-full h-auto object-cover rounded-t-xl"
               />
             </div>

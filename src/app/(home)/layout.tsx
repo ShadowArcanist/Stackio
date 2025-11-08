@@ -13,7 +13,10 @@ function docsOptions(): DocsLayoutProps {
       {
         type: "custom",
         children: (
-          <BuyMeACoffeeInfo username="shadowarcanist" className="lg:-mx-2 pr-4" />
+          <BuyMeACoffeeInfo
+            username="shadowarcanist"
+            className="lg:-mx-2 pr-4"
+          />
         ),
       },
       {
