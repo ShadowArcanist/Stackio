@@ -1,0 +1,48 @@
+---
+title: App Guide
+description: Your first document
+---
+
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+
+<Steps>
+  <Step>
+
+  ### Create a new resource on Coolify
+  
+  ![](/dev-samples/1.webp)
+    1. Select your project from the Coolify dashboard.
+    2. Click the **+ New** button to create a new resource.
+  </Step>
+
+<Step>
+
+### Select Docker Compose Empty as resource type
+  
+  ![](/dev-samples/1.webp)
+Choose **Docker Compose Empty** from the available resource types.
+
+</Step>
+
+<Step>
+
+### Paste compose content from Stackio
+
+  ![](/dev-samples/1.webp)
+  1. Pick the aplication you want to deploy on stackio.
+  2. Copy the compose content
+  3. Paste it on Coolify and Click continue
+
+</Step>
+
+<Step>
+
+### Deploy Application
+
+  ![](/dev-samples/1.webp)
+  1. Check on stackio if the application need extra configuration like filling in environment variables values.
+  2. Change the application domain (optional), Coolify will generate a subdomain for the application with the application uuid and you can change it to your liking if you want.
+  3. Deploy the application by clicking the deploy button.
+
+</Step>
+</Steps>
