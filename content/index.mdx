@@ -1,22 +1,22 @@
 ---
 title: Explore
-description: Here you can find all the services available as One click services on Coolify
+description: Here you can find all the applications available as One click applications on Coolify
 icon: Compass
 ---
 
-import ServiceCatalog from '@/components/service-catalog';
+import ApplicationCatalog from '@/components/application-catalog';
 
-## One Click Services Catalog
+## One Click Applications Catalog
 
-Here you can find all the services available as One click services on Coolify
+Here you can find all the applications available as One click applications on Coolify
 
 <br />
 
-export const services = [
+export const applications = [
   {
     title: "Umami",
     description: "A lightweight, open-source web analytics tool that prioritizes user privacy by not using cookies.",
-    href: "service",
+    href: "application",
     imageSrc: "/dev-samples/1.webp",
     category: "Analytics"
   },
@@ -78,6 +78,6 @@ export const services = [
   }
 ];
 
-export const categories = Array.from(new Set(services.map(service => service.category)));
+export const categories = Array.from(new Set(applications.map(application => application.category)));
 
-<ServiceCatalog services={services} categories={categories} />
+<ApplicationCatalog applications={applications} categories={categories} />

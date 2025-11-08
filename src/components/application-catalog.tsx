@@ -5,7 +5,7 @@ import { type ReactNode, useEffect, useMemo, useRef, useState } from "react";
 import { ImageCard } from "@/components/image-card";
 import { ImageCardGroup } from "@/components/image-card-group";
 
-interface Service {
+interface Application {
   title: string;
   description: string;
   href: string;
@@ -13,12 +13,15 @@ interface Service {
   category: string;
 }
 
-interface ServiceCatalogProps {
-  services: Service[];
+interface ApplicationCatalogProps {
+  applications: Application[];
   categories: string[];
 }
 
-const ServiceCatalog = ({ services, categories }: ServiceCatalogProps) => {
+const ApplicationCatalog = ({
+  applications,
+  categories,
+}: ApplicationCatalogProps) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -36,17 +39,19 @@ const ServiceCatalog = ({ services, categories }: ServiceCatalogProps) => {
     }
   };
 
-  const filteredServices = useMemo(() => {
-    return services.filter((service) => {
+  const filteredApplications = useMemo(() => {
+    return applications.filter((application) => {
       const matchesCategory =
         selectedCategories.length === 0 ||
-        selectedCategories.includes(service.category);
+        selectedCategories.includes(application.category);
       const matchesSearch =
-        service.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        service.description.toLowerCase().includes(searchQuery.toLowerCase());
+        application.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        application.description
+          .toLowerCase()
+          .includes(searchQuery.toLowerCase());
       return matchesCategory && matchesSearch;
     });
-  }, [searchQuery, selectedCategories, services]);
+  }, [searchQuery, selectedCategories, applications]);
 
   const highlight = (text: string): ReactNode => {
     if (!searchQuery) return text;
@@ -162,23 +167,23 @@ const ServiceCatalog = ({ services, categories }: ServiceCatalogProps) => {
       </div>
 
       {categories.map((category) => {
-        const servicesForCategory = filteredServices.filter(
-          (service) => service.category === category,
+        const applicationsForCategory = filteredApplications.filter(
+          (application) => application.category === category,
         );
-        if (servicesForCategory.length === 0) return null;
+        if (applicationsForCategory.length === 0) return null;
 
         return (
           <div key={category}>
             <h3 className="mt-12 mb-2">{category}</h3>
             <ImageCardGroup>
-              {servicesForCategory.map((service) => (
+              {applicationsForCategory.map((application) => (
                 <ImageCard
-                  key={service.title}
-                  title={highlight(service.title)}
-                  description={highlight(service.description)}
-                  href={service.href}
-                  imageSrc={service.imageSrc}
-                  imageAlt={service.title}
+                  key={application.title}
+                  title={highlight(application.title)}
+                  description={highlight(application.description)}
+                  href={application.href}
+                  imageSrc={application.imageSrc}
+                  imageAlt={application.title}
                 />
               ))}
             </ImageCardGroup>
@@ -189,4 +194,4 @@ const ServiceCatalog = ({ services, categories }: ServiceCatalogProps) => {
   );
 };
 
-export default ServiceCatalog;
+export default ApplicationCatalog;
