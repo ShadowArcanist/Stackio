@@ -1,0 +1,44 @@
+name: Remove awaiting maintainer review label
+
+on:
+  pull_request_review:
+    types: [submitted]
+
+jobs:
+  remove-label:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Remove awaiting maintainer review label
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const review = context.payload.review;
+            const reviewer = review.user.login;
+            const maintainers = ["ShadowArcanist"];
+
+            if ((review.state === 'approved' || review.state === 'changes_requested') && maintainers.includes(reviewer)) {
+              const prNumber = context.payload.pull_request.number;
+              const repo = context.repo.repo;
+              const owner = context.repo.owner;
+
+              // Check if label exists
+              const labels = await github.rest.issues.listLabelsOnIssue({
+                owner,
+                repo,
+                issue_number: prNumber
+              });
+
+              const labelName = "PR awaiting maintainer review";
+              const hasLabel = labels.data.some(label => label.name === labelName);
+
+              if (hasLabel) {
+                await github.rest.issues.removeLabel({
+                  owner,
+                  repo,
+                  issue_number: prNumber,
+                  name: labelName
+                });
+              }
+            }
