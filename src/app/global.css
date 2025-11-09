@@ -2,6 +2,16 @@
 @import "fumadocs-ui/css/neutral.css";
 @import "fumadocs-ui/css/preset.css";
 
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/Inter.woff2") format("woff2");
+  font-display: swap;
+}
+
+.font-inter {
+  font-family: "Inter", sans-serif;
+}
+
 .prose h2 {
   margin-bottom: 0.4em;
 }
