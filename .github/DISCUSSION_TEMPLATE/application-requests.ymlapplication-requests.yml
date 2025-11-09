@@ -1,0 +1,62 @@
+labels: ["Discussion triage needed"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        > [!IMPORTANT]
+        > Please read through [the Discussion rules](https://github.com), and check for both existing [Discussions](https://github.com) and [Issues](https://github.com) prior to opening a new Discussion.
+  
+  - type: input
+    attributes:
+      label: Application Name
+      description: |
+        Enter the name of the application.
+      placeholder: |
+        Netbird
+    validations:
+      required: true
+
+  - type: input
+    attributes:
+      label: Official Website
+      description: |
+        Provide the official website URL.
+      placeholder: |
+        https://netbird.io/
+    validations:
+      required: true
+
+  - type: input
+    attributes:
+      label: Documentation Link
+      description: |
+        Provide the documentation site URL.
+      placeholder: |
+        https://docs.netbird.io/
+    validations:
+      required: true
+
+  - type: input
+    attributes:
+      label: GitHub Repository (Codebase)
+      description: |
+        Provide the link to the GitHub repository.
+      placeholder: |
+        https://github.com/netbirdio/netbird
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Additional Notes (Optional)
+      description: |
+        Provide any additional context or information for the discussion.
+
+  - type: checkboxes
+    attributes:
+      label: "I acknowledge that:"
+      options:
+        - label: I have reviewed discussion and confirm that my request is NOT among them.
+          required: true
+        - label: I have searched the Stackio repository (both open and closed Discussions and Issues) and confirm this is not a duplicate of an existing issue or discussion.
+          required: true
