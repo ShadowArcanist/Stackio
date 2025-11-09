@@ -1,0 +1,22 @@
+labels: ["Discussion triage needed"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        > [!IMPORTANT]
+        > Please read through [the Discussion rules](https://github.com), and check for both existing [Discussions](https://github.com) and [Issues](https://github.com) prior to opening a new Discussion.
+
+  - type: textarea
+    attributes:
+      label: Explain your idea or suggestion
+      description: |
+        Provide context or information for the discussion.
+
+  - type: checkboxes
+    attributes:
+      label: "I acknowledge that:"
+      options:
+        - label: I have reviewed discussion and confirm that my idea/suggestion is NOT among them.
+          required: true
+        - label: I have searched the Stackio repository (both open and closed Discussions and Issues) and confirm this is not a duplicate of an existing issue or discussion.
+          required: true
