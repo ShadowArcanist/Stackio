@@ -1,0 +1,62 @@
+name: Restrict Issue Creation to Maintainers
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  check-issue-author:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check if issue was created by a maintainer
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            // Define allowed maintainers
+            const maintainers = ["ShadowArcanist"]; // <-- Github usernames
+
+            const issueAuthor = context.payload.issue.user.login;
+            const issueNumber = context.payload.issue.number;
+            const repo = context.repo.repo;
+            const owner = context.repo.owner;
+
+            if (!maintainers.includes(issueAuthor)) {
+              console.log(`Issue #${issueNumber} created by ${issueAuthor}, not a maintainer.`);
+
+              // Post a polite comment
+              await github.rest.issues.createComment({
+                owner,
+                repo,
+                issue_number: issueNumber,
+                body: `Hi @${issueAuthor}! Thank you so much for taking the time to contribute.\n\nTo help us keep things organized, only maintainers can open new issues in this repository.\n\nIf you'd like to share feedback, ask a question, or suggest an idea, please start a discussion instead: https://github.com/ShadowArcanist/Stackio/discussions\n\nWe'll close this issue to keep the tracker tidy, we truly appreciate your understanding and enthusiasm for the project 💙`
+
+              });
+              
+              // Add label
+              await github.rest.issues.addLabels({
+                owner,
+                repo,
+                issue_number: issueNumber,
+                labels: ["Contributors Guidelines Ignored"]
+              });
+
+              // Close the issue
+              await github.rest.issues.update({
+                owner,
+                repo,
+                issue_number: issueNumber,
+                state: "closed"
+              });
+
+              // Lock the conversation
+              await github.rest.issues.lock({
+                owner,
+                repo,
+                issue_number: issueNumber,
+                lock_reason: "off-topic"
+              });
+            } else {
+              console.log(`Issue #${issueNumber} created by a maintainer (${issueAuthor}).`);
+            }
