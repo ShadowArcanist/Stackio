@@ -1,0 +1,121 @@
+name: Auto Close Stale PRs
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # Runs daily at midnight UTC
+  workflow_dispatch:  # Allow manual trigger for testing
+
+jobs:
+  stale-pr-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Close stale PRs
+        uses: actions/stale@v9
+        with:
+          # Only consider PRs with these labels as candidates for staleness
+          only-pr-labels: 'PR awaiting response from author,PR awaiting changes from author'
+
+          # Ignore draft PRs
+          exempt-draft-pr: true
+
+          # Days before marking as stale
+          days-before-stale: 7
+
+          # Days before closing after being marked stale
+          days-before-close: 7
+
+          # Label to apply when marking as stale
+          stale-pr-label: 'PR Stale'
+
+          # Message when marking as stale
+          stale-pr-message: |
+            Hi @${author}! 👋
+
+            This pull request has been awaiting your action for 7 days. 
+            
+            If you're still working on this, please let us know by commenting or pushing a commit. Otherwise, this PR may be closed automatically in another 7 days to keep our repository tidy.
+
+            Thank you for your contribution! 💙
+
+          # Message when closing
+          close-pr-message: |
+            Hi @${author}! 👋
+
+            This pull request has been inactive for 7 days after being marked as stale. 
+            
+            We're closing it to keep our repository organized, but feel free to reopen it if you decide to continue working on it!
+
+            Thank you for your understanding and for contributing to the project. 💙
+
+          # Remove stale label when PR is updated
+          remove-pr-stale-when-updated: true
+
+          # Operations per run
+          operations-per-run: 30
+
+  cleanup-labels:
+    runs-on: ubuntu-latest
+    needs: stale-pr-check
+    steps:
+      - name: Clean up labels on closed PRs
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            // Get PRs closed in the last 25 hours
+            const twentyFiveHoursAgo = new Date(Date.now() - 25 * 60 * 60 * 1000).toISOString();
+
+            const { data: prs } = await github.rest.pulls.list({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: "closed",
+              sort: "updated",
+              direction: "desc",
+              per_page: 100
+            });
+
+            const awaitingLabels = ["PR awaiting response from author", "PR awaiting changes from author"];
+
+            for (const pr of prs) {
+              // Only process PRs closed in the last 25 hours
+              const closedAt = new Date(pr.closed_at);
+              if (closedAt < new Date(twentyFiveHoursAgo)) continue;
+
+              const labels = pr.labels.map(l => l.name);
+              const hasAwaitingLabel = awaitingLabels.some(label => labels.includes(label));
+
+              // Only process PRs that have awaiting labels (indicating they were handled by stale action)
+              if (!hasAwaitingLabel) continue;
+
+              console.log(`Processing closed PR #${pr.number} (closed at ${closedAt}) - has awaiting labels`);
+
+              // Remove all existing labels
+              for (const label of labels) {
+                try {
+                  await github.rest.issues.removeLabel({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    issue_number: pr.number,
+                    name: label
+                  });
+                  console.log(`Removed "${label}" from PR #${pr.number}`);
+                } catch (error) {
+                  console.log(`Could not remove "${label}" from PR #${pr.number}: ${error.message}`);
+                }
+              }
+
+              // Add the "PR closed due to inactivity" label
+              try {
+                await github.rest.issues.addLabels({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: pr.number,
+                  labels: ["PR closed due to inactivity"]
+                });
+                console.log(`Added "PR closed due to inactivity" to PR #${pr.number}`);
+              } catch (error) {
+                console.log(`Could not add label to PR #${pr.number}: ${error.message}`);
+              }
+            }
+
+
