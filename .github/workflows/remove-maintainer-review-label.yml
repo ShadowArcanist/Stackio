@@ -1,4 +1,4 @@
-name: Remove awaiting maintainer review label
+name: Remove Maintainer Review Label
 
 on:
   pull_request_review:
