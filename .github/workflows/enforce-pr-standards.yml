@@ -1,0 +1,154 @@
+name: Enforce PR Standards
+
+on:
+  pull_request:
+    types: [opened]
+
+jobs:
+  check-pr:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check PR standards
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const pr = context.payload.pull_request;
+            const prTitle = pr.title;
+            const prBody = pr.body || '';
+            const prNumber = pr.number;
+            const repo = context.repo.repo;
+            const owner = context.repo.owner;
+            const author = pr.user.login;
+            const maintainers = ["ShadowArcanist"]; // <-- Github usernames
+
+            const isMaintainer = maintainers.includes(author);
+
+            // Only run detailed checks for non-maintainers
+            if (!isMaintainer) {
+              // 1. Check PR title prefix
+              const validPrefixes = ['[core]', '[application]', '[automation]', '[changelog]', '[docs]'];
+              const hasValidPrefix = validPrefixes.some(prefix => prTitle.startsWith(prefix));
+              if (!hasValidPrefix) {
+                await github.rest.issues.createComment({
+                  owner,
+                  repo,
+                  issue_number: prNumber,
+                  body: `Hi @${context.payload.pull_request.user.login}! Thank you for your contribution. \n\nIt looks like the PR title doesn't follow our contributor guidelines. \n\nPlease ensure the title starts with one of: **[core]**, **[application]**, **[automation]**, **[changelog]**, **[docs]** and send a new pull request.`
+                });
+                await github.rest.issues.addLabels({
+                  owner,
+                  repo,
+                  issue_number: prNumber,
+                  labels: ["Contributors Guidelines Ignored"]
+                });
+                await github.rest.pulls.update({
+                  owner,
+                  repo,
+                  pull_number: prNumber,
+                  state: "closed"
+                });
+                await github.rest.issues.lock({
+                  owner,
+                  repo,
+                  issue_number: prNumber,
+                  lock_reason: "off-topic"
+                });
+                return;
+              }
+
+              // 2. Check for agreement message
+              const agreementMessage = "I have read and understood the contributor guidelines, and I agree that maintainers may close this pull request without a review.";
+              if (!prBody.includes(agreementMessage)) {
+                await github.rest.issues.createComment({
+                  owner,
+                  repo,
+                  issue_number: prNumber,
+                  body: `Hi @${author}! Thank you for your contribution. \n\nIt seems your PR description is missing the required contributor agreement message. \n\nPlease review the contributor guidelines and submit a new PR with the required contributor agreement message.`
+                });
+                await github.rest.issues.addLabels({
+                  owner,
+                  repo,
+                  issue_number: prNumber,
+                  labels: ["Contributors Guidelines Ignored"]
+                });
+                await github.rest.pulls.update({
+                  owner,
+                  repo,
+                  pull_number: prNumber,
+                  state: "closed"
+                });
+                await github.rest.issues.lock({
+                  owner,
+                  repo,
+                  issue_number: prNumber,
+                  lock_reason: "off-topic"
+                });
+                return;
+              }
+
+              // 3. Check PR description word count
+              const wordCount = prBody.split(/\s+/).filter(Boolean).length;
+              if (wordCount >= 300) {
+                await github.rest.issues.createComment({
+                  owner,
+                  repo,
+                  issue_number: prNumber,
+                  body: `Hi @${author}! Thank you for your contribution. \n\nThe PR description seems quite long. Please break it into smaller, manageable PRs and submit them as new PRs.`
+                });
+                await github.rest.pulls.update({
+                  owner,
+                  repo,
+                  pull_number: prNumber,
+                  state: "closed"
+                });
+                await github.rest.issues.lock({
+                  owner,
+                  repo,
+                  issue_number: prNumber,
+                  lock_reason: "off-topic"
+                });
+                return;
+              }
+
+              // 4. Check for 3 or more emojis
+              const emojiRegex = /[\u{1F600}-\u{1F64F}]|[\u{1F300}-\u{1F5FF}]|[\u{1F680}-\u{1F6FF}]|[\u{1F1E0}-\u{1F1FF}]|[\u{2600}-\u{26FF}]|[\u{2700}-\u{27BF}]/gu;
+              const emojiMatches = prBody.match(emojiRegex);
+              if (emojiMatches && emojiMatches.length >= 3) {
+                await github.rest.issues.addLabels({
+                  owner,
+                  repo,
+                  issue_number: prNumber,
+                  labels: ["PR likely AI slop"]
+                });
+              }
+
+              // 5. Assign reviewers if none
+              const reviewers = pr.requested_reviewers || [];
+              if (reviewers.length === 0) {
+                await github.rest.pulls.requestReviewers({
+                  owner,
+                  repo,
+                  pull_number: prNumber,
+                  reviewers: maintainers
+                });
+                await github.rest.issues.addLabels({
+                  owner,
+                  repo,
+                  issue_number: prNumber,
+                  labels: ["PR awaiting maintainer review"]
+                });
+              }
+            }
+
+            // 6. Check for links to issues or discussions (run for everyone)
+            const issueLinkRegex = /#(\d+)|https:\/\/github\.com\/[^\/]+\/[^\/]+\/(issues|discussions)\/\d+/g;
+            if (issueLinkRegex.test(prTitle) || issueLinkRegex.test(prBody)) {
+              await github.rest.issues.addLabels({
+                owner,
+                repo,
+                issue_number: prNumber,
+                labels: ["PR closes an Issue or Discussion"]
+              });
+            }
