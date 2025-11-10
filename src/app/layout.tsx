@@ -21,6 +21,11 @@ export default function Layout({ children }: LayoutProps<"/">) {
         >
           {children}
         </RootProvider>
+        <script
+          defer
+          src={process.env.NEXT_PUBLIC_UMAMI_SCRIPT_URL}
+          data-website-id={process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID}
+        ></script>
       </body>
     </html>
   );
