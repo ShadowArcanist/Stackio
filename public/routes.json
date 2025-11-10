@@ -1,0 +1,14 @@
+{
+  "routes": [
+    {
+      "pattern": "/discord",
+      "redirect": "https://discord.com/invite/RFsTaG4HvN",
+      "status": 301
+    },
+    {
+      "pattern": "/community",
+      "redirect": "https://discord.com/invite/RFsTaG4HvN",
+      "status": 301
+    }
+  ]
+}
