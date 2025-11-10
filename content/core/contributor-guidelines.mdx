@@ -1,0 +1,140 @@
+---
+title: Contributors Guidelines
+description: Learn how you can start contributing to Stackio.
+---
+
+import { InlineTOC } from 'fumadocs-ui/components/inline-toc';
+import { Callout } from "@/components/callout";
+import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
+
+
+# Contributing to Stackio [!toc]
+We’re happy that you’re interested in contributing to Stackio!
+
+You can contribute to Stackio in many different ways, such as providing support to others in our support discussions on GitHub, requesting new application templates, sending PRs to fix bugs, or adding new applications.
+
+<InlineTOC items={toc}>Table of Contents</InlineTOC>
+
+<Callout title="Important" type="warn">
+  Our guidelines may seem stricter than in most open source projects, but this helps keep things organized and maintainable in the long run.
+  
+  You might feel that strict guidelines can turn away contributors, but they help prevent maintainer burnout and frustration, which ultimately keeps the project healthy.
+</Callout>
+
+
+## 1. Support Contributions
+We mainly use the [GitHub Discussions](https://github.com/ShadowArcanist/Stackio/discussions) feature for support requests, and we also have a [community Discord server](https://shadowarcanist.com/discord) where people can look for help.
+
+We provide Coolify-compatible compose files and guides for open-source applications, but if you run into any issues while using compose files or guides from us, you should not create issues or support posts on Coolify’s community or GitHub. Maintainers there will redirect you to Coolify support only if the issue is related to Coolify.
+
+Everyone should use our GitHub Discussions for help instead of GitHub Issues. Only maintainers can open issues in our repository, and they are reserved for bugs and application template requests. Maintainers will convert discussions into issues when an actionable fix or feature addition is confirmed.
+
+
+### Receving Support
+If you are requesting support, you must provide as much information as possible about your issue so others can help you effectively. Most importantly, respect everyone, people help others voluntarily in their own time.
+
+Please avoid pinging maintainers for attention. They will check discussions when they get some free time. You can ping a maintainer if no one has responded to your discussion for over two weeks.
+
+### Providing support
+If you are offering support to others, verify the information or guide before sharing it. Most importantly, be patient and kind with others, even when they are not.
+
+---
+
+## 2. Application requests Contributions
+Everyone should create a new discussion under “[Application Requests](https://github.com/ShadowArcanist/Stackio/discussions/categories/application-requests)” in our GitHub repository. Only maintainers can open issues in our repository, and those are reserved for bugs and application template requests. Maintainers will convert discussions into issues when an actionable fix or feature addition is confirmed.
+
+The application you want to see added to Stackio must have Docker images published by the official team of that application. The application should be well maintained by its team and used by many people.
+
+Maintainers may reject application requests without providing any reason.
+
+---
+
+## 3. Pull requests Contributions
+Maintainers may close pull requests at their discretion without giving any reason (this applies to all pull requests).
+
+### Pull request must close an Issue or Discussion
+Every pull request must close an issue or a discussion in our repository. 
+
+You can send a pull request that does not close an issue or discussion, but there is no guarantee that maintainers will review it. They might review it in a day, a week, a year, or they may close it without a review.
+
+### Pull request title formatting
+Every pull request must start with a category keyword. The title must begin with one of the following:
+
+- `[core]` - Changes to the codebase related to the Stackio site
+- `[application]` - Changes to existing application pages or adding a new application
+- `[automation]` - Changes to GitHub workflow files
+- `[changelog]` - Changes to the changelog
+
+<Callout title="Examples" type="tip">
+  - `[application]` **Added new application Beszel**
+  - `[core]` **Fixed image zoom not working on mobile devices**
+</Callout>
+
+### AI usage disclosure 
+If you are using AI or receiving help from AI in the process of creating the pull request (or in any of the changes in it), you should mention this in the pull request description.
+
+We do not dislike or oppose AI usage. However, some people submit pull requests entirely done by AI without understanding what the changes do, which wastes maintainers’ time and reduces trust in the contributor. 
+
+AI usage is perfectly fine as long as you know exactly what your pull request changes do and why each change is being made.
+
+### Test before you submit
+You should test your changes thoroughly before sending the pull request. Your changes must work as expected when a maintainer tests them.
+
+
+### Images guidelines
+Applications can have screenshots and logos, which should be included on the application’s page on Stackio. 
+
+<Callout title="Important" type="warn">
+  If you cannot follow the image guidelines, that’s okay, just let the maintainers know in your pull request description. They will add required images when they test your pull request.
+</Callout>
+
+
+If you are adding any image to Stackio, please follow these guidelines:
+
+1. All images should be in `.webp` format.
+2. Application screenshots and logos should be placed in `/public/images/application/<Application-Name>`.
+3. Images should have meaningful names (avoid names like `1.webp`, use `light-mode-screenshot-1.webp` instead)
+4. Screenshot images should have a resolution of `1920px x 1080px`, and the content should be clearly visible on all devices.
+5. Application logo images should have a resolution of `512px x 512px`, and they should be clearly visible in both light and dark modes.
+
+---
+
+## 4. Setting up development environment
+1. Fork the [Stackio](https://github.com/ShadowArcanist/Stackio) repository to your GitHub account ([guide](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/fork-a-repo)).
+2. Clone the Stackio Repository from your fork to your local machine ([guide](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository))
+3. Run `bun install` to install all dependencies
+4. Run `bun dev` to start the development server
+5. Open `http://localhost:3000` in your browser to view the Stackio site and start working on your changes.
+6. Once you have finished your changes, run `bun lint` and then `bun format` (if you get any lint errors or warnings).
+7. Test your changes thoroughly.
+
+<Callout title="Tip" type="tip">
+  We use `bun` as our package manager, but you can use any package manager you prefer. Just make sure not to commit your package manager’s lock files to the repository.
+</Callout>
+
+## 5. Sending a Pull request
+1. Once you have completed development, commit your changes to your forked repository.
+2. Push the changes to your GitHub account (`git push`)
+3. Visit [Stackio](https://github.com/ShadowArcanist/Stackio) repository on Github
+4. Click the “Pull Requests” tab and then the green “New Pull Request” button.
+5. Choose your fork and branch as the compare branch.
+6. Fill out the pull request details and submit it by clicking “Create Pull Request”
+
+<Callout title="Note" type="info">
+  Make sure your pull request is out of draft mode as soon as it’s ready for review or merge. 
+  
+  Pull requests that remain in draft mode for too long may be closed by maintainers.
+</Callout>
+
+## FAQ
+<Accordions type="single">
+  <Accordion title="When will pull requests be reviewed?">We try our best to review all pull requests as soon as we can. </Accordion>
+
+  <Accordion title="If I get stuck or need help with development, can I get help?">Yes! Feel free to create a new discussion at [Support Requests](https://github.com/ShadowArcanist/Stackio/discussions/categories/support-requests).</Accordion>
+
+  <Accordion title="Why are only maintainers allowed to create issues in the repository?">To keep things organized. Maintainers will convert discussions into issues when an actionable fix or feature addition is confirmed.</Accordion>
+
+  <Accordion title="Can I reopen a discussion after it’s marked as resolved?">Yes, but we prefer creating new discussions so that people following the old one won’t be notified unnecessarily. It also helps keep discussions small and focused.</Accordion>
+
+  <Accordion title="My PR got closed without review. What can I do?">You can comment on the PR to ask the maintainer for feedback or clarification. The maintainer may or may not respond, but if they do, you can follow their suggestions to make your PR acceptable.</Accordion>
+</Accordions>
