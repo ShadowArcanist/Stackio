@@ -11,7 +11,7 @@
 </table>
 
 
-![Discord](https://img.shields.io/discord/995737329979375646?logo=discord&label=Discord%20Community&link=https%3A%2F%2Fshadowarcanist.com%2Fdiscord) ![GitHub Discussions](https://img.shields.io/github/discussions/shadowarcanist/stackio?logo=github&label=Discussions)
+![Discord](https://img.shields.io/discord/995737329979375646?logo=discord&label=Discord%20Community&link=https%3A%2F%2Fshadowarcanist.com%2Fdiscord)
 ![GitHub Release](https://img.shields.io/github/v/release/shadowarcanist/stackio?display_name=release&style=flat&logo=github&label=Latest%20Release&link=https%3A%2F%2Fgithub.com%2FShadowArcanist%2FStackio%2Freleases) ![Static Badge](https://img.shields.io/badge/Buymeacoffee-ShadowArcanist-yellow?logo=buymeacoffee&link=https%3A%2F%2Fshadowarcanist.com%2Fdonate)
 
 
