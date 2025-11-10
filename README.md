@@ -1,45 +1,28 @@
-# stackio
+<table width="100%">
+  <tr>
+    <td align="left" width="160">
+      <img src=".github/assets/logo.png" alt="Stackio Logo" width="160" />
+    </td>
+    <td align="left">
+      <h1>Stackio</span></h1>
+      <h3 style="margin-top: -10px;">A collection of Coolify-compatible compose files for popular apps.</h3>
+    </td>
+  </tr>
+</table>
 
-This is a Next.js application generated with
-[Create Fumadocs](https://github.com/fuma-nama/fumadocs).
 
-Run development server:
+![Discord](https://img.shields.io/discord/995737329979375646?logo=discord&label=Discord%20Community&link=https%3A%2F%2Fshadowarcanist.com%2Fdiscord) ![GitHub Discussions](https://img.shields.io/github/discussions/shadowarcanist/stackio?logo=github&label=Discussions)
+![GitHub Release](https://img.shields.io/github/v/release/shadowarcanist/stackio?display_name=release&style=flat&logo=github&label=Latest%20Release&link=https%3A%2F%2Fgithub.com%2FShadowArcanist%2FStackio%2Freleases) ![Static Badge](https://img.shields.io/badge/Buymeacoffee-ShadowArcanist-yellow?logo=buymeacoffee&link=https%3A%2F%2Fshadowarcanist.com%2Fdonate)
 
-```bash
-npm run dev
-# or
-pnpm dev
-# or
-yarn dev
-```
 
-Open http://localhost:3000 with your browser to see the result.
+> [!IMPORTANT]  
+> Stackio is created by [ShadowArcanist](https://stackio.shadowarcanist.com), an official Coolify team member, but this project is **completely independent** of Coolify.
+> 
+> If you experience issues deploying apps using Stackio’s Compose files or guides, please **DO NOT** open support tickets on Coolify’s GitHub or Discord. Instead, submit a support request on our [GitHub Discussions](https://github.com/ShadowArcanist/Stackio/discussions/categories/support-requests).
 
-## Explore
 
-In the project, you can see:
-
-- `lib/source.ts`: Code for content source adapter, [`loader()`](https://fumadocs.dev/docs/headless/source-api) provides the interface to access your content.
-- `lib/layout.shared.tsx`: Shared options for layouts, optional but preferred to keep.
-
-| Route                     | Description                                            |
-| ------------------------- | ------------------------------------------------------ |
-| `app/(home)`              | The route group for your landing page and other pages. |
-| `app/docs`                | The documentation layout and pages.                    |
-| `app/api/search/route.ts` | The Route Handler for search.                          |
-
-### Fumadocs MDX
-
-A `source.config.ts` config file has been included, you can customise different options like frontmatter schema.
-
-Read the [Introduction](https://fumadocs.dev/docs/mdx) for further details.
-
-## Learn More
-
-To learn more about Next.js and Fumadocs, take a look at the following
-resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js
-  features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-- [Fumadocs](https://fumadocs.dev) - learn about Fumadocs
+### Links
+- Official website: https://stackio.shadowarcanist.com
+- Contributors guidelines: https://stackio.shadowarcanist.com/core/contributor-guidelines
+- Support: https://github.com/ShadowArcanist/Stackio/discussions/categories/support-requests
+- Discord Community: https://shadowarcanist.com/discord
