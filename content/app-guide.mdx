@@ -1,48 +1,63 @@
 ---
-title: App Guide
-description: Your first document
+title: Application Deployment Guide
+description: Learn how to deploy applications using Stackio and Coolify
 ---
 
 import { Step, Steps } from 'fumadocs-ui/components/steps';
+import { Callout } from "@/components/callout";
+
+
+## How to Deploy an Application?
+Stackio provides pre-configured Docker Compose templates for popular applications. 
+
+Follow the steps below to deploy an application:
 
 <Steps>
   <Step>
+    ### Create a new resource on Coolify
 
-  ### Create a new resource on Coolify
-  
-  ![](/dev-samples/1.webp)
-    1. Select your project from the Coolify dashboard.
-    2. Click the **+ New** button to create a new resource.
+    Select your project from the Coolify dashboard and click the **+ New** button to create a new resource.
+
+    ![Resource page on Coolify](/images/core/application-deploy-guide/resources-page.webp)
   </Step>
 
-<Step>
+  <Step>
+    ### Select docker compose empty as resource type
 
-### Select Docker Compose Empty as resource type
+    Choose **Docker Compose Empty** from the available resource types.
+
+    ![New Resource page on Coolify](/images/core/application-deploy-guide/new-resource-page.webp)
+  </Step>
+
+
+  <Step>
+    ### Select your deployment server
+
+    Choose the server you want to deploy the application from the available servers list.
+
+    ![Server selector page on Coolify](/images/core/application-deploy-guide/server-selector.webp)
+      <Callout title="Note" type="info">
+        If you don’t have a remote server connected to Coolify, this screen will not show.
+      </Callout>
+  </Step>
+
+  <Step>
+    ### Paste compose content from Stackio
+
+    - Copy the compose content from Stackio, and paste it into Coolify. 
+
+    ![Docker compose empty input area on Coolify](/images/core/application-deploy-guide/docker-compose-empty-input.webp)
+    - Then click on **save** button.
+  </Step>
   
-  ![](/dev-samples/1.webp)
-Choose **Docker Compose Empty** from the available resource types.
+  <Step>
+    ### Deploy the Application
 
-</Step>
+    Check on Stackio if the application requires additional configuration, such as environment variables.
 
-<Step>
+    ![Service configuration page on Coolify](/images/core/application-deploy-guide/service-configuration-page.webp)
 
-### Paste compose content from Stackio
+    - Deploy the application by clicking the deploy button.
+  </Step>
 
-  ![](/dev-samples/1.webp)
-  1. Pick the aplication you want to deploy on stackio.
-  2. Copy the compose content
-  3. Paste it on Coolify and Click continue
-
-</Step>
-
-<Step>
-
-### Deploy Application
-
-  ![](/dev-samples/1.webp)
-  1. Check on stackio if the application need extra configuration like filling in environment variables values.
-  2. Change the application domain (optional), Coolify will generate a subdomain for the application with the application uuid and you can change it to your liking if you want.
-  3. Deploy the application by clicking the deploy button.
-
-</Step>
 </Steps>
