@@ -21,6 +21,7 @@ export default async function Page(props: PageProps<"/[[...slug]]">) {
       toc={page.data.toc}
       full={page.data.full}
       tableOfContent={{ style: "clerk" }}
+      breadcrumb={{ enabled: false }}
     >
       <DocsBody>
         <MDX
