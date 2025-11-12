@@ -59,7 +59,7 @@ jobs:
               }
 
               // 2. Check for agreement message
-              const agreementMessage = "I have read and understood the [contributor guidelines](https://stackio.shadowarcanist.com/core/contributor-guideline), and agree to the terms.";
+              const agreementMessage = "I have read and understood the [contributor guidelines](https://stackio.shadowarcanist.com/core/contributor-guidelines), and agree to the terms.";
               if (!prBody.includes(agreementMessage)) {
                 await github.rest.issues.createComment({
                   owner,
