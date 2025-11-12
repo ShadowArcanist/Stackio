@@ -13,6 +13,8 @@ import { AppData } from "@/components/app-data";
 import { AppGuide } from "@/components/application-deployment-guide";
 import { Tab, Tabs } from "fumadocs-ui/components/tabs";
 import { Step, Steps } from "fumadocs-ui/components/steps";
+import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
+
 
 export function getMDXComponents(components?: MDXComponents): MDXComponents {
   return {
@@ -40,5 +42,7 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
     Tabs,
     Steps,
     Step,
+    Accordion,
+    Accordions
   };
 }
