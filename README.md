@@ -29,4 +29,4 @@
 - Discord Community: https://shadowarcanist.com/discord
 
 ### Credits
-Huge thanks to [Fumadocs](https://fumadocs.dev/) (and [TechWithAnirudh](https://github.com/techwithanirudh)) for providing the awesome [starter template](https://github.com/techwithanirudh/fumadocs-starter)!
+Huge thanks to [Fuma Nama](https://www.fuma-nama.dev/) for creating [Fumadocs](https://fumadocs.dev/), and to [TechWithAnirudh](https://github.com/techwithanirudh) for the awesome [Starter template](https://github.com/techwithanirudh/fumadocs-starter) !
