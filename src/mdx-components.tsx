@@ -1,20 +1,17 @@
+import { Accordion, Accordions } from "fumadocs-ui/components/accordion";
 import { ImageZoom } from "fumadocs-ui/components/image-zoom";
+import { Step, Steps } from "fumadocs-ui/components/steps";
+import { Tab, Tabs } from "fumadocs-ui/components/tabs";
 import defaultMdxComponents from "fumadocs-ui/mdx";
 import type { MDXComponents } from "mdx/types";
-
-import Details from "@/components/details";
-import { Detail } from "@/components/details";
+import { AppData } from "@/components/app-data";
+import { AppGuide } from "@/components/application-deployment-guide";
+import { Callout } from "@/components/callout";
+import Details, { Detail } from "@/components/details";
 import { ImageCard } from "@/components/image-card";
 import { ImageCardGroup } from "@/components/image-card-group";
 import { MediaCard } from "@/components/media-card";
 import { MediaCardGroup } from "@/components/media-card-group";
-import { Callout } from "@/components/callout";
-import { AppData } from "@/components/app-data";
-import { AppGuide } from "@/components/application-deployment-guide";
-import { Tab, Tabs } from "fumadocs-ui/components/tabs";
-import { Step, Steps } from "fumadocs-ui/components/steps";
-import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
-
 
 export function getMDXComponents(components?: MDXComponents): MDXComponents {
   return {
@@ -43,6 +40,6 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
     Steps,
     Step,
     Accordion,
-    Accordions
+    Accordions,
   };
 }
