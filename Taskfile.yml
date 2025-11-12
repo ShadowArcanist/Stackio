@@ -54,3 +54,16 @@ tasks:
             start "$URL"
           fi
         ' sh {{.CLI_ARGS}}
+
+
+  # 🧹 Clean build artifacts
+  # Removes .next, .source, and out directories if they exist
+  clean:
+    desc: "Remove .next, .source, and out directories"
+    silent: true
+    cmds:
+      - |
+        bash -c '
+          rm -rf .next .source out
+          echo "Clean complete!"
+        '
