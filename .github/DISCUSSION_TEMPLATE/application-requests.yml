@@ -58,5 +58,5 @@ body:
       options:
         - label: I have reviewed discussion and confirm that my request is NOT among them.
           required: true
-        - label: I have searched the Stackio repository (both open and closed Discussions and Issues) and confirm this is not a duplicate of an existing issue or discussion.
+        - label: I have searched the [Stackio repository](https://github.com/ShadowArcanist/Stackio) (both open and closed Discussions and Issues) and confirm this is not a duplicate of an existing issue or discussion.
           required: true
