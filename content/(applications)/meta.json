@@ -1,7 +1,11 @@
 {
   "title": "Applications",
-  "description": "Set up your documentation",
-  "icon": "Book",
+  "description": "Explore a collection of open-source applications you can deploy on Coolify easily.",
+  "icon": "Shapes",
   "root": true,
-  "pages": ["index", "---Getting Started---", "..."]
+  "pages": [
+    "index",
+    "---Analytics---",
+    "...analytics"
+  ]
 }

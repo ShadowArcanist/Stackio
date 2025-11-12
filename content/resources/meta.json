@@ -3,5 +3,11 @@
   "description": "A collection of helpful guides and resources.",
   "icon": "BookMarked",
   "root": true,
-  "pages": [ "---Guides---", "application-deployment-guide", "application-update-guide", "---Stackio Resources---", "contributor-guidelines"]
+  "pages": [
+    "---Guides---",
+    "application-deployment-guide",
+    "application-update-guide",
+    "---Stackio Resources---",
+    "contributor-guidelines"
+  ]
 }

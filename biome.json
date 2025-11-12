@@ -32,6 +32,11 @@
       "tailwindDirectives": true
     }
   },
+  "json": {
+    "formatter": {
+      "enabled": false
+    }
+  },
   "assist": {
     "actions": {
       "source": {
