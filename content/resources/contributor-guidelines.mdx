@@ -118,49 +118,35 @@ If you are adding any image to Stackio, please follow these guidelines:
 ## 5. Codebase Structure
 <Files>
   <Folder name=".github">
-    <Folder name="assets">
-      <File name="logo.png" />
-    </Folder>
     <Folder name="DISCUSSION_TEMPLATE">
-      <File name="application-requests.yml" />
-      <File name="stackio-ideas.yml" />
-      <File name="support-requests.yml" />
+      <File name="*.yml" />
     </Folder>
     <Folder name="workflows">
-      <File name="close-stale-prs.yml" />
-      <File name="enforce-pr-standards.yml" />
-      <File name="production-release.yml" />
-      <File name="remove-maintainer-review-label.yml" />
-      <File name="restrict-issue-creation.yml" />
+      <File name="*.yml" />
     </Folder>
-    <File name="FUNDING.yml" />
-    <File name="pull_request_template.md" />
   </Folder>
   <Folder name="content" defaultOpen>
-    <Folder name="application">
+    <Folder name="(applications)">
+      <File name="*.mdx" />
+      <File name="meta.json" />
     </Folder>
-    <Folder name="core">
-      <File name="application-deployment-guide.mdx" />
-      <File name="application-update-guide.mdx" />
-      <File name="contributor-guidelines.mdx" />
+    <Folder name="resources">
+      <File name="*.mdx" />
+      <File name="meta.json" />
     </Folder>
-    <File name="changelog.mdx" />
-    <File name="index.mdx" />
-    <File name="meta.json" />
+    <Folder name="changelog">
+      <File name="index.mdx" />
+      <File name="meta.json" />
+    </Folder>
   </Folder>
   <Folder name="public">
     <Folder name="fonts">
-      <File name="Inter.woff2" />
+      <File name="*.woff2" />
     </Folder>
     <Folder name="images">
-      <Folder name="core">
-        <Folder name="application-deploy-guide">
-        </Folder>
-        <Folder name="update-guide">
-        </Folder>
+      <Folder name="resources">
+        <File name="*.webp" />
       </Folder>
-      <File name="favicon.ico" />
-      <File name="logo.webp" />
     </Folder>
   </Folder>
   <Folder name="src">
@@ -186,27 +172,12 @@ If you are adding any image to Stackio, please follow these guidelines:
           </Folder>
         </Folder>
       </Folder>
-      <File name="global.css" />
-      <File name="layout.tsx" />
     </Folder>
     <Folder name="components">
       <Folder name="ui">
-        <File name="button.tsx" />
+      <File name="*.tsx" />
       </Folder>
-      <File name="app-data.tsx" />
-      <File name="application-catalog.tsx" />
-      <File name="application-deployment-guide.tsx" />
-      <File name="buymeacoffee-info.tsx" />
-      <File name="callout.tsx" />
-      <File name="changelog.tsx" />
-      <File name="details.tsx" />
-      <File name="discord-info.tsx" />
-      <File name="github-info.tsx" />
-      <File name="image-card-group.tsx" />
-      <File name="image-card.tsx" />
-      <File name="media-card-group.tsx" />
-      <File name="media-card.tsx" />
-      <File name="update-guide.tsx" />
+      <File name="*.tsx" />
     </Folder>
     <Folder name="lib">
       <File name="cn.ts" />
@@ -222,8 +193,8 @@ If you are adding any image to Stackio, please follow these guidelines:
 ### Folder/File Explanations
 - `.github/`: Contains GitHub-specific configurations including workflows for CI/CD, and discussion templates.
 - `content/`: Holds the MDX content files for the documentation site.
-  - `application/`: Contains MDX files for individual application documentation and deployment guides.
-  - `core/`: Core documentation like contributor guidelines and deployment guides.
+  - `(application)/`: Contains MDX files for individual application documentation and deployment guides.
+  - `resources/`: Core documentation like contributor guidelines and deployment guides.
   - `meta.json`: Controls sidebar content structure
 - `public/`: Static assets served by the application, such as images, fonts, and favicons.
 - `src/`: The main source code directory.
@@ -246,7 +217,7 @@ If you are adding any image to Stackio, please follow these guidelines:
   The pull request description will be automatically populated by GitHub using our predefined PR template. This template includes the following statement:
 
   ```sh
-  I have read and understood the [contributor guidelines](https://stackio.shadowarcanist.com/core/contributor-guidelines), and agree to the terms.
+  I have read and understood the [contributor guidelines](https://stackio.shadowarcanist.com/resources/contributor-guidelines), and agree to the terms.
   ```
   
   Any pull request description that does not include this statement will be automatically closed.

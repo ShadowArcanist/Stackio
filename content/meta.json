@@ -1,9 +1,3 @@
 {
-  "pages": [
-    "index",
-    "---[SplinePointer] AI---",
-    "test",
-    "---[Zap] No Code---",
-    "..."
-  ]
+  "pages": ["(applications)", "resources", "changelog"]
 }

@@ -62,8 +62,8 @@ const ApplicationCatalog = ({
         <mark
           key={`highlight-${keyCounter++}`}
           style={{
-            backgroundColor: "var(--color-fd-primary)",
-            color: "var(--color-fd-card)",
+            backgroundColor: "var(--color-fd-accent)",
+            color: "var(--color-fd-accent-foreground)",
           }}
         >
           {part}
@@ -109,7 +109,7 @@ const ApplicationCatalog = ({
             placeholder="Search apps by name or description"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full p-2 pl-9 border border-fd-border rounded-lg bg-fd-secondary text-fd-foreground text-sm h-[42px]"
+            className="w-full p-2 pl-9 border border-fd-border rounded-lg bg-fd-secondary text-fd-foreground text-sm h-[42px] focus:outline-none focus:ring-2 focus:ring-[var(--color-fd-primary)]"
           />
         </div>
         <div
@@ -119,7 +119,7 @@ const ApplicationCatalog = ({
           <button
             type="button"
             onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-            className="w-full md:w-auto flex items-center justify-between gap-2 p-2 border border-fd-border rounded-lg bg-fd-secondary text-fd-foreground text-sm h-[42px]"
+            className="w-full md:w-auto flex items-center justify-between gap-2 p-2 border border-fd-border rounded-lg bg-fd-secondary text-fd-foreground text-sm h-[42px] focus:ring-0"
           >
             <div className="flex items-center gap-2 md:px-2">
               <Filter className="text-gray-400 w-4 h-4" />

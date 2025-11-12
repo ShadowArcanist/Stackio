@@ -24,6 +24,9 @@
 
 ### Links
 - Official website: https://stackio.shadowarcanist.com
-- Contributors guidelines: https://stackio.shadowarcanist.com/core/contributor-guidelines
+- Contributors guidelines: https://stackio.shadowarcanist.com/resources/contributor-guidelines
 - Support: https://github.com/ShadowArcanist/Stackio/discussions/categories/support-requests
 - Discord Community: https://shadowarcanist.com/discord
+
+### Credits
+Huge thanks to [Fumadocs](https://fumadocs.dev/) (and [TechWithAnirudh](https://github.com/techwithanirudh)) for providing the awesome [starter template](https://github.com/techwithanirudh/fumadocs-starter)!

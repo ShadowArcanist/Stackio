@@ -4,7 +4,7 @@ body:
     attributes:
       value: |
         > [!IMPORTANT]
-        > Please read through our [contributor guidelines](https://stackio.shadowarcanist.com/core/contributor-guidelines), and check for both existing [Discussions](https://github.com/ShadowArcanist/Stackio/discussions) and [Issues](https://github.com/ShadowArcanist/Stackio/issues) prior to opening a new Discussion.
+        > Please read through our [contributor guidelines](https://stackio.shadowarcanist.com/resources/contributor-guidelines), and check for both existing [Discussions](https://github.com/ShadowArcanist/Stackio/discussions) and [Issues](https://github.com/ShadowArcanist/Stackio/issues) prior to opening a new Discussion.
   
   - type: input
     attributes:

@@ -15,14 +15,12 @@ export function BuyMeACoffeeInfo({
       target="_blank"
       {...props}
       className={cn(
-        "flex flex-col gap-1.5 p-2 rounded-lg text-sm text-fd-foreground/80 transition-colors lg:flex-row lg:items-center hover:text-fd-accent-foreground hover:bg-fd-accent",
+        "flex items-center gap-1.5 p-2 rounded-lg text-sm text-fd-foreground/80 transition-colors hover:text-fd-accent-foreground hover:bg-fd-accent",
         props.className,
       )}
     >
-      <p className="flex items-center gap-2 truncate">
-        <Coffee className="size-3.5" />
-        Buy me a coffee
-      </p>
+      <Coffee className="size-3.5" />
+      <span className="md:hidden text-xs">Buy me a Coffee</span>
     </a>
   );
 }

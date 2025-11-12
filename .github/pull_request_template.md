@@ -22,6 +22,6 @@
 
 ### Contributor Agreement
 > [!IMPORTANT]
- > - [x] I have read and understood the [contributor guidelines](https://stackio.shadowarcanist.com/core/contributor-guideline), and agree to the terms.
+ > - [x] I have read and understood the [contributor guidelines](https://stackio.shadowarcanist.com/resources/contributor-guideline), and agree to the terms.
  > - [x] I have tested the changes thoroughly and am confident that they will work as expected without issues when the maintainer tests them
  
