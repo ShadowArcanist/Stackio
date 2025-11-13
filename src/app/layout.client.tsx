@@ -1,6 +1,6 @@
 "use client";
 
-import type { Folder, Page, Root } from "fumadocs-core/page-tree";
+import type { Folder, Item as Page, Root } from "fumadocs-core/page-tree";
 import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";
 import { cn } from "@/lib/cn";
