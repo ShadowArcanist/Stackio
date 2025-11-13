@@ -28,8 +28,8 @@ export default function Layout({ children }: { children: ReactNode }) {
             type: "custom",
             children: (
               <GithubInfo
-                owner="fuma-nama"
-                repo="fumadocs"
+                owner="ShadowArcanist"
+                repo="Stackio"
                 className="lg:-mx-2 pr-2"
               />
             ),
