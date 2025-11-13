@@ -5,151 +5,263 @@ description: Learn how you can deploy Umami Analytics on Coolify.
 
 
 <AppData
-  title="Activepieces"
-  description="All-in-one AI automation designed to be extensible through a type-safe pieces framework written in TypeScript."
-  imageSrc="/logo.webp"
-  githubHref="https://github.com/test1"
-  websiteHref="https://test1.com"
+  title="Umami"
+  description="A lightweight, open-source web analytics tool that prioritizes user privacy by not using cookies."
+  imageSrc="/images/applications/analytics/umami/logo.webp"
+  githubHref="https://github.com/umami-software/umami?utm_source=stackio.shadowarcanist.com"
+  websiteHref="https://umami.is/?utm_source=stackio.shadowarcanist.com"
 />
 
-<AppGuide />
 
-## Code Block
-
-```js
-console.log('Hello World');
-```
-
-## Cards
-
-<Cards>
-  <Card title="Learn more about Next.js" href="https://nextjs.org/docs" />
-  <Card title="Learn more about Fumadocs" href="https://fumadocs.dev" />
-</Cards>
-
-<Callout type="tip" title="Availability">Testing **Callouts**</Callout>
-
-
-<ImageCardGroup>
-  <ImageCard
-    title="ShadowArcanist"
-    description="How to deploy Umami analytics on Coolify"
-    href="/application"
-    imageSrc="/dev-samples/1.webp"
-  />
-  <ImageCard
-    title="Airoflare"
-    description="How to Setup Backup for Umami Database"
-    href="/package-managers/javascript/pnpm"
-    imageSrc="/dev-samples/2.webp"
-  />
-  <ImageCard
-    title="ShadowArcanist"
-    description="How to restore Umami DB backup"
-    href="/package-managers/javascript/npm"
-    imageSrc="/dev-samples/3.webp"
-  />
-</ImageCardGroup>
-
-<Tabs items={["Dark Mode", "Light Mode"]}>
-  <Tab value="Dark Mode">
-    <MediaCardGroup>
-      <MediaCard
-        description="How to deploy Umami analytics on Coolify"
-        imageSrc="/dev-samples/1.webp"
+<Tabs items={["Umami v2", "Umami v3"]} persist updateAnchor>
+  <Tab value="Umami v2" id="umami-v2">
+    ## Screenshots
+    <Tabs items={["Dark Mode", "Light Mode"]} persist updateAnchor>
+      <Tab value="Dark Mode" id="umami-v2-darkmode">
+        <MediaCardGroup>
+          <MediaCard
+            description="Dashboard homepage"
+            imageSrc="/images/applications/analytics/umami/screenshots/dark-home.webp"
+          />
+          <MediaCard
+            description="Website analytics"
+            imageSrc="/images/applications/analytics/umami/screenshots/dark-site.webp"
+          />
+          <MediaCard
+            description="Website analytics (below the fold)"
+            imageSrc="/images/applications/analytics/umami/screenshots/dark-site2.webp"
+          />
+          <MediaCard
+            description="Compare between time range"
+            imageSrc="/images/applications/analytics/umami/screenshots/dark-compare.webp"
+          />
+          <MediaCard
+            description="Events"
+            imageSrc="/images/applications/analytics/umami/screenshots/dark-events.webp"
+          />
+          <MediaCard
+            description="Events (below the fold)"
+            imageSrc="/images/applications/analytics/umami/screenshots/dark-events-scroll.webp"
+          />
+        </MediaCardGroup>
+      </Tab>  
+      <Tab value="Light Mode" id="umami-v2-lightmode">
+        <MediaCardGroup>
+          <MediaCard
+            description="Dashboard homepage"
+            imageSrc="/images/applications/analytics/umami/screenshots/light-home.webp"
+          />
+          <MediaCard
+            description="Website analytics"
+            imageSrc="/images/applications/analytics/umami/screenshots/light-site.webp"
+          />
+          <MediaCard
+            description="Website analytics (below the fold)"
+            imageSrc="/images/applications/analytics/umami/screenshots/light-site2.webp"
+          />
+          <MediaCard
+            description="Compare between time range"
+            imageSrc="/images/applications/analytics/umami/screenshots/light-compare.webp"
+          />
+          <MediaCard
+            description="Events"
+            imageSrc="/images/applications/analytics/umami/screenshots/light-events.webp"
+          />
+          <MediaCard
+            description="Events (below the fold)"
+            imageSrc="/images/applications/analytics/umami/screenshots/light-events-scroll.webp"
+          />
+        </MediaCardGroup>
+      </Tab>  
+    </Tabs>  
+    
+    ## Compose
+    <Tabs items={["Umami with PostgreSQL Database", "Umami with MySQL Database"]} persist updateAnchor>
+      <Tab value="Umami with PostgreSQL Database" id="umami-v2-compose-psql-db">
+        ```yaml
+        services:
+          umami:
+            image: 'ghcr.io/umami-software/umami:postgresql-v2.19' # Released on Jul 28 2025 (last release of v2)
+            environment:
+              - SERVICE_URL_UMAMI_3000
+              - 'DATABASE_URL=postgres://$SERVICE_USER_POSTGRES:$SERVICE_PASSWORD_POSTGRES@postgresql:5432/$POSTGRES_DB'
+              - DATABASE_TYPE=postgres
+              - APP_SECRET=$SERVICE_PASSWORD_64_UMAMI
+            depends_on:
+              postgresql:
+                condition: service_healthy
+            healthcheck:
+              test:
+                - CMD
+                - curl
+                - '-f'
+                - 'http://127.0.0.1:3000/api/heartbeat'
+              interval: 5s
+              timeout: 20s
+              retries: 10
+              
+          postgresql:
+            image: 'postgres:16-alpine'
+            volumes:
+              - 'postgresql-data:/var/lib/postgresql/data'
+            environment:
+              - POSTGRES_USER=$SERVICE_USER_POSTGRES
+              - POSTGRES_PASSWORD=$SERVICE_PASSWORD_POSTGRES
+              - 'POSTGRES_DB=${POSTGRES_DB:-umami}'
+            healthcheck:
+              test:
+                - CMD-SHELL
+                - 'pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}'
+              interval: 5s
+              timeout: 20s
+              retries: 10
+        ```
+      </Tab> 
+      <Tab value="Umami with MySQL Database" id="umami-v2-compose-mysql-db">
+        ```yaml
+        services:
+          umami:
+            image: 'ghcr.io/umami-software/umami:mysql-v2.19' # Released on Jul 28 2025 (last release of v2)
+            environment:
+              - SERVICE_URL_UMAMI_3000
+              - 'DATABASE_URL=mysql://$SERVICE_USER_MYSQL:$SERVICE_PASSWORD_MYSQL@mysql:3306/$MYSQL_DATABASE'
+              - DATABASE_TYPE=mysql
+              - APP_SECRET=$SERVICE_PASSWORD_64_UMAMI
+            depends_on:
+              mysql:
+                condition: service_healthy
+            healthcheck:
+              test:
+                - CMD
+                - curl
+                - '-f'
+                - 'http://127.0.0.1:3000/api/heartbeat'
+              interval: 5s
+              timeout: 20s
+              retries: 10
+              
+          mysql:
+            image: 'mysql:8'
+            volumes:
+              - 'mysql-data:/var/lib/mysql'
+            environment:
+              - MYSQL_ROOT_PASSWORD=$SERVICE_PASSWORD_ROOT
+              - 'MYSQL_DATABASE=${MYSQL_DATABASE:-umami}'
+              - MYSQL_USER=$SERVICE_USER_MYSQL
+              - MYSQL_PASSWORD=$SERVICE_PASSWORD_MYSQL
+            healthcheck:
+              test:
+                - CMD
+                - mysqladmin
+                - ping
+                - '-h'
+                - 127.0.0.1
+              interval: 5s
+              timeout: 20s
+              retries: 10
+        ```
+      </Tab> 
+    </Tabs> 
+    
+    ## Informations
+    <Tabs items={['System Requirements', 'Environment Variables' , 'Default Login', 'Resource Usage']} persist updateAnchor>
+      <Tab value="System Requirements" id="umami-v2-sys-requirements">
+        <Callout 
+        type="warn"
+        title="Important">
+          We couldn’t find official minimum system requirements from Umami. 
+        
+          Based on our testing, we recommend the specifications below for small websites with low traffic. 
+        
+          Depending on your usage, you may need a server with higher resources.
+        </Callout>
+        <Details className="mt-5">
+          <Detail label="Operating System" value="Linux" icon={<Radiation />} />
+          <Detail label="System Architecture" value="ARM64 & x86" icon={<Cog />} />
+          <Detail label="Compute (CPU)" value="1 cores" icon={<Cpu />} />
+          <Detail label="Memory (RAM)" value="2 GB" icon={<Microchip />} />
+          <Detail label="Disk (STORAGE)" value="6 GB" icon={<Database />} />
+        </Details>
+      </Tab>
+      <Tab value="Environment Variables" id="umami-v2-env">
+        <Callout>These are the required variables needed to run Umami. For extra features, add more variables from the list in [Umami's docs](https://v2.umami.is/docs/environment-variables#runtime-variables).</Callout>
+        <Details className="mt-5">
+          <Detail label="DATABASE_URL" value="postgres://...:5432/$POSTGRES_DB..:5432/$POSTGRES_DB..:5432/$POSTGRES_DB..:5432/$POSTGRES_DB" icon={<CircleDashed />} />
+          <Detail label="DATABASE_TYPE" value="postgres" icon={<CircleDashed />} />
+          <Detail label="SERVICE_URL_UMAMI_3000" value="https://your.domain.com:3000" icon={<CircleDashed />} />
+          <Detail label="APP_SECRET" value="$SERVICE_PASSWORD_64_UMAMI" icon={<CircleDashed />} />
+        </Details>
+      </Tab>
+      <Tab value="Default Login" id="umami-v2-default-login">
+        <Callout>Replace `your.domain.com` with the domain you entered on Coolify as the domain for Umami.</Callout>
+          <Details className="mt-5">
+          <Detail label="Login URL" value="https://your.domain.com/login" icon={<Link />} />
+          <Detail label="Username" value="admin" icon={<User />} />
+          <Detail label="Password" value="umami" icon={<KeyRound />} />
+        </Details>
+      </Tab>
+      <Tab value="Resource Usage" id="umami-v2-resource-usage">
+        <Callout>These are the resource usage levels we observed when running a new Umami instance without any user data.</Callout>
+        <MediaCardGroup>
+          <MediaCard
+            description="Umami with PostgreSQL Database"
+            imageSrc="/images/applications/analytics/umami/resource-usage-umami-psql.webp"
+          />
+          <MediaCard
+            description="Umami with MySQL Database"
+            imageSrc="/images/applications/analytics/umami/resource-usage-umami-mysql.webp"
+          />
+        </ MediaCardGroup>
+      </Tab>
+    </Tabs>
+      
+    ## FAQ
+    <Accordions type="single">
+      <Accordion 
+        title="How to deploy this Application?">
+        <AppGuide />
+      </Accordion>
+    
+      <Accordion 
+        title="How to update this Application to newer version?">
+        <UpdateGuide />
+      </Accordion>
+    
+      <Accordion 
+        title="I wasn’t able to deploy this application. How can I get help?">
+        You can create a discussion in our GitHub repository under the [Support Requests](https://github.com/ShadowArcanist/Stackio/discussions/categories/support-requests) category.
+      </Accordion>
+    </Accordions>
+    
+    ## Resources
+    <Cards className="mt-5">
+      <Card
+        title="Website"
+        href="https://umami.is/?utm_source=stackio.shadowarcanist.com"
+        icon={<Globe />}
+        description="Umami official website"
       />
-      <MediaCard
-        description="How to Setup Backup for Umami Database"
-        imageSrc="/dev-samples/2.webp"
+      <Card
+        title="Documentation"
+        href="https://umami.is/docs?utm_source=stackio.shadowarcanist.com"
+        icon={<BookImage />}
+        description="Umami official documentation"
       />
-      <MediaCard
-        description="How to restore Umami DB backup"
-        imageSrc="/dev-samples/3.webp"
+      <Card
+        title="Github Repository"
+        href="https://github.com/umami-software/umami?utm_source=stackio.shadowarcanist.com"
+        icon={<Github />}
+        description="Umami official Github repository"
       />
-    </MediaCardGroup>
+    </Cards>
+            
+    
   </Tab>  
 
-  <Tab value="Light Mode">
-    <MediaCardGroup>
-      <MediaCard
-        description="How to deploy Umami analytics on Coolify"
-        imageSrc="/dev-samples/1.webp"
-      />
-      <MediaCard
-        description="How to Setup Backup for Umami Database"
-        imageSrc="/dev-samples/2.webp"
-      />
-      <MediaCard
-        description="How to restore Umami DB backup"
-        imageSrc="/dev-samples/3.webp"
-      />
-    </MediaCardGroup>
+  <Tab value="Umami v3" id="umami-v3">
+    <Callout 
+      type="info">
+        Umami v3 will be added to Stackio soon!
+      </Callout>
   </Tab>  
 </Tabs>  
-
-
-<Tabs items={['System Requirements', 'Environment Variables' , 'Default Login', 'Resource Usage']}>
-  <Tab value="System Requirements">
-  <Callout>These are the minium system requirements provided by Umami, you may have to choose a server with more resources depending on your usage.</Callout>
-  <Details className="mt-5">
-  <Detail label="Operating System" value="Linux" icon={<Radiation />} />
-  <Detail label="System Architecture" value="ARM64 & x86" icon={<Cog />} />
-  <Detail label="Compute (CPU)" value="2 cores" icon={<Cpu />} />
-  <Detail label="Memory (RAM)" value="4 GB" icon={<Microchip />} />
-  <Detail label="Disk (STORAGE)" value="20 GB" icon={<Database />} />
-  <Detail label="Network" value="IPv4"   icon={<ArrowUpDown />} />
-</Details>
-</Tab>
-  <Tab value="Environment Variables">
-  <Callout>These are the basic variables needed to run Umami. For extra features, add more variables from the list in [Umami's docs]().</Callout>
-  <Details className="mt-5">
-  <Detail label="DATABASE_URL" value="postgres://...:5432/$POSTGRES_DB..:5432/$POSTGRES_DB..:5432/$POSTGRES_DB..:5432/$POSTGRES_DB" icon={<CircleDashed />} />
-  <Detail label="DATABASE_TYPE" value="postgres" icon={<CircleDashed />} />
-  <Detail label="APP_SECRET" value="$SERVICE_PASSWORD_64_UMAMI" icon={<CircleDashed />} />
-  <Detail label="POSTGRES_USER" value="$SERVICE_USER_POSTGRES" icon={<CircleDashed />} />
-  <Detail label="POSTGRES_PASSWORD" value="$SERVICE_PASSWORD_POSTGRES" icon={<CircleDashed />} />
-  <Detail label="POSTGRES_DB" value="${POSTGRES_DB:-umami}" icon={<CircleDashed />} />
-  </Details>
-</Tab>
-<Tab value="Default Login">
-  <Callout>Replace `<YOUR_UMAMI_DOMAIN>` with the domain you entered on Coolify as the domain for Umami.</Callout>
-  <Details className="mt-5">
-  <Detail label="Login URL" value="https://<YOUR_UMAMI_DOMAIN>/login" icon={<Link />} />
-  <Detail label="Username" value="admin" icon={<User />} />
-  <Detail label="Password" value="umami" icon={<KeyRound />} />
-  </Details>
-</Tab>
-<Tab value="Resource Usage">
-  <Callout>Replace `<YOUR_UMAMI_DOMAIN>` with the domain you entered on Coolify as the domain for Umami.</Callout>
-  <MediaCard
-    description="How to restore Umami DB backup"
-    imageSrc="/dev-samples/3.webp"
-  />
-</Tab>
-</Tabs>
-
-
-## Resources
-<Cards className="mt-5">
-  <Card
-    title="Website"
-    href="/coolify/troubleshooting/error-500-coolify-db/"
-    icon={<Globe />}
-    description="Official Website of ServiceName"
-  />
-
-  <Card
-    title="Documentation"
-    href="https://example.com"
-    icon={<BookImage />}
-    description="Official Documentation of ServiceName"
-  />
-
-  <Card
-    title="Github Repository"
-    href="https://github.com"
-    icon={<Github />}
-    description="Official Github Repository of ServiceName"
-  />
-
-</Cards>

@@ -7,6 +7,7 @@ import * as LucideIcons from "lucide-react";
 import type { MDXComponents } from "mdx/types";
 import { AppData } from "@/components/app-data";
 import { AppGuide } from "@/components/application-deployment-guide";
+import { UpdateGuide } from "@/components/application-update-guide";
 import { Callout } from "@/components/callout";
 import Details, { Detail } from "@/components/details";
 import { ImageCard } from "@/components/image-card";
@@ -36,6 +37,7 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
     Callout,
     AppData,
     AppGuide,
+    UpdateGuide,
     Tab,
     Tabs,
     Steps,
