@@ -4,7 +4,12 @@ on:
   release:
     types: [published]
   workflow_dispatch:
-    
+    inputs:
+      tag:
+        description: 'Docker tag'
+        required: true
+        default: 'v0.0.0'
+        
 permissions:
   contents: read
   packages: write
@@ -35,9 +40,9 @@ jobs:
           push: true
           tags: |
             ghcr.io/shadowarcanist/stackio:latest
-            ghcr.io/shadowarcanist/stackio:${{ github.event.release.tag_name }}
+            ghcr.io/shadowarcanist/stackio:${{ github.event.inputs.tag || github.event.release.tag_name }}
           build-args: |
             NEXT_PUBLIC_SITE_URL=${{ secrets.NEXT_PUBLIC_SITE_URL }}
             NEXT_PUBLIC_UMAMI_WEBSITE_ID=${{ secrets.NEXT_PUBLIC_UMAMI_WEBSITE_ID }}
             NEXT_PUBLIC_UMAMI_SCRIPT_URL=${{ secrets.NEXT_PUBLIC_UMAMI_SCRIPT_URL }}
-            VERSION=${{ github.event.release.tag_name }}
+            VERSION=${{ github.event.inputs.tag || github.event.release.tag_name }}
