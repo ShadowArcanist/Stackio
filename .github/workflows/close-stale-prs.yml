@@ -12,6 +12,9 @@ jobs:
       - name: Close stale PRs
         uses: actions/stale@v9
         with:
+          # Skip PRs with Stale Exempt label
+          any-of-pr-labels: 'Stale Exempt'
+
           # Only consider PRs with these labels as candidates for staleness
           only-pr-labels: 'PR awaiting response from author,PR awaiting changes from author'
 
@@ -35,7 +38,7 @@ jobs:
             
             If you're still working on this, please let us know by commenting or pushing a commit. Otherwise, this PR may be closed automatically in another 7 days to keep our repository tidy.
 
-            Thank you for your contribution! 💙
+            Thank you for your contribution! 💛
 
           # Message when closing
           close-pr-message: |
@@ -45,7 +48,7 @@ jobs:
             
             We're closing it to keep our repository organized, but feel free to reopen it if you decide to continue working on it!
 
-            Thank you for your understanding and for contributing to the project. 💙
+            Thank you for your understanding and for contributing to the project. 💛
 
           # Remove stale label when PR is updated
           remove-pr-stale-when-updated: true
@@ -53,10 +56,6 @@ jobs:
           # Operations per run
           operations-per-run: 30
 
-  cleanup-labels:
-    runs-on: ubuntu-latest
-    needs: stale-pr-check
-    steps:
       - name: Clean up labels on closed PRs
         uses: actions/github-script@v7
         with:
@@ -117,5 +116,3 @@ jobs:
                 console.log(`Could not add label to PR #${pr.number}: ${error.message}`);
               }
             }
-
-

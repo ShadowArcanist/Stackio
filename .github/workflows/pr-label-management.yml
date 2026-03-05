@@ -1,0 +1,58 @@
+name: PR Label Management
+
+on:
+  pull_request:
+    types: [opened, reopened]
+  workflow_dispatch:
+
+jobs:
+  manage-pr-labels:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Add maintainer labels to PRs
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const maintainers = ["ShadowArcanist"];
+            const staleExemptLabel = "Stale Exempt";
+            const maintainerLabel = "✨ Maintainer";
+
+            const { data: prs } = await github.rest.pulls.list({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: "open",
+              per_page: 100
+            });
+
+            for (const pr of prs) {
+              const isMaintainer = maintainers.includes(pr.user.login);
+              const hasStaleExempt = pr.labels.some(l => l.name === staleExemptLabel);
+              const hasMaintainerLabel = pr.labels.some(l => l.name === maintainerLabel);
+
+              if (isMaintainer) {
+                const labelsToAdd = [];
+                if (!hasStaleExempt) labelsToAdd.push(staleExemptLabel);
+                if (!hasMaintainerLabel) labelsToAdd.push(maintainerLabel);
+
+                if (labelsToAdd.length > 0) {
+                  console.log(`Adding labels [${labelsToAdd.join(', ')}] to PR #${pr.number} - author ${pr.user.login} is a maintainer`);
+                  await github.rest.issues.addLabels({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    issue_number: pr.number,
+                    labels: labelsToAdd
+                  });
+                }
+              } else if (hasStaleExempt || hasMaintainerLabel) {
+                console.log(`Removing maintainer labels from PR #${pr.number} - author is not a maintainer`);
+                if (hasMaintainerLabel) {
+                  await github.rest.issues.removeLabel({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    issue_number: pr.number,
+                    name: maintainerLabel
+                  });
+                }
+              }
+            }
