@@ -1,15 +1,32 @@
 # Stage 1: Builder stage using the optimized Bun image
 FROM oven/bun:alpine AS builder
 
+# Set build arguments for environment variables
+ARG NEXT_PUBLIC_SITE_URL
+ARG NEXT_PUBLIC_UMAMI_WEBSITE_ID
+ARG NEXT_PUBLIC_UMAMI_SCRIPT_URL
+ARG VERSION
+
+# Set environment variables
+ENV NEXT_PUBLIC_SITE_URL=$NEXT_PUBLIC_SITE_URL
+ENV NEXT_PUBLIC_UMAMI_WEBSITE_ID=$NEXT_PUBLIC_UMAMI_WEBSITE_ID
+ENV NEXT_PUBLIC_UMAMI_SCRIPT_URL=$NEXT_PUBLIC_UMAMI_SCRIPT_URL
+ENV VERSION=$VERSION
+
 # Set the working directory for the build
 WORKDIR /app
 
-# Copy the project files from the build context into the container
+# Copy package files first for caching
+COPY package.json bun.lock ./
+
+# Install dependencies
+RUN bun install
+
+# Copy remaining project files
 COPY . .
 
-# Install dependencies and build the project (output will be in the "out" directory)
-RUN bun install && \
-    bun run build
+# Build the project (output will be in the "out" directory)
+RUN bun run build
 
 # Stage 2: Final NGINX image
 FROM nginxinc/nginx-unprivileged:alpine-slim AS final
