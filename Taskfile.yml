@@ -67,3 +67,17 @@ tasks:
           rm -rf .next .source out
           echo "Clean complete!"
         '
+
+  # 🐳 Build and run dev container
+  # Builds the Docker image and starts a container on port 8080
+  docker-dev:
+    desc: "Build and run Docker dev container on port 8080"
+    silent: true
+    cmds:
+      - |
+        bash -c '
+          docker build -t stackio-dev .
+          docker rm -f stackio-dev 2>/dev/null || true
+          docker run -d --name stackio-dev -p 8080:8080 stackio-dev
+          echo "Container started on http://localhost:8080"
+        '
