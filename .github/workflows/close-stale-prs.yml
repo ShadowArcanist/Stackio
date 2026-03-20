@@ -15,6 +15,10 @@ jobs:
           # Skip PRs with Stale Exempt label
           any-of-pr-labels: 'Stale Exempt'
 
+          # This workflow is PR-only; never process issues.
+          days-before-issue-stale: -1
+          days-before-issue-close: -1
+
           # Only consider PRs with these labels as candidates for staleness
           only-pr-labels: 'PR awaiting response from author,PR awaiting changes from author'
 
