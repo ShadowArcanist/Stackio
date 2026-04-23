@@ -1,4 +1,4 @@
-name: Build and Publish Docker Image
+name: Build, Publish and Deploy
 
 on:
   release:
@@ -6,21 +6,43 @@ on:
   workflow_dispatch:
     inputs:
       tag:
-        description: 'Docker tag'
+        description: "Docker tag"
         required: true
-        default: 'v0.0.0'
-        
+        default: "v0.0.0"
+
 permissions:
   contents: read
+  deployments: write
   packages: write
 
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
+    if: github.repository == 'ShadowArcanist/stackio'
+    env:
+      APP_NAME: stackio
+      DEPLOY_ENVIRONMENT: Production
+      WATCHD_URL: ${{ secrets.WATCHD_URL }}
+      WATCHD_SHARED_SECRET: ${{ secrets.WATCHD_SHARED_SECRET }}
+      PRODUCTION_URL: ${{ vars.PRODUCTION_URL }}
+      IMAGE_NAME: ghcr.io/shadowarcanist/stackio
+      WEBHOOK_RETRY_ATTEMPTS: "40"
+      WEBHOOK_RETRY_DELAY_SECONDS: "15"
 
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
+
+      - name: Resolve tag
+        id: tag
+        shell: bash
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            TAG="${{ inputs.tag }}"
+          else
+            TAG="${{ github.event.release.tag_name }}"
+          fi
+          echo "tag=${TAG}" >> "$GITHUB_OUTPUT"
 
       - name: Log in to GitHub Container Registry
         uses: docker/login-action@v3
@@ -29,20 +51,153 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      # - name: Pull latest image for cache
-      #   run: docker pull ghcr.io/shadowarcanist/stackio:latest || true
-
       - name: Build and push Docker image
+        id: build
         uses: docker/build-push-action@v6
         with:
           context: .
           file: ./Dockerfile
           push: true
           tags: |
-            ghcr.io/shadowarcanist/stackio:latest
-            ghcr.io/shadowarcanist/stackio:${{ github.event.inputs.tag || github.event.release.tag_name }}
+            ${{ env.IMAGE_NAME }}:latest
+            ${{ env.IMAGE_NAME }}:${{ steps.tag.outputs.tag }}
           build-args: |
             NEXT_PUBLIC_SITE_URL=${{ secrets.NEXT_PUBLIC_SITE_URL }}
             NEXT_PUBLIC_UMAMI_WEBSITE_ID=${{ secrets.NEXT_PUBLIC_UMAMI_WEBSITE_ID }}
             NEXT_PUBLIC_UMAMI_SCRIPT_URL=${{ secrets.NEXT_PUBLIC_UMAMI_SCRIPT_URL }}
-            VERSION=${{ github.event.inputs.tag || github.event.release.tag_name }}
+            VERSION=${{ steps.tag.outputs.tag }}
+
+      - name: Create GitHub deployment object
+        id: deployment
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: bash
+        run: |
+          python3 - <<'PY' > deployment-request.json
+          import json
+          import os
+          import sys
+
+          payload = {
+              "ref": os.environ["GITHUB_SHA"],
+              "environment": os.environ["DEPLOY_ENVIRONMENT"],
+              "auto_merge": False,
+              "required_contexts": [],
+              "description": "Deployment requested by GitHub Actions",
+          }
+          sys.stdout.write(json.dumps(payload, separators=(",", ":")))
+          PY
+
+          curl -fsSL \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer ${GH_TOKEN}" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            --data-binary @deployment-request.json \
+            "https://api.github.com/repos/${GITHUB_REPOSITORY}/deployments" \
+            > deployment-response.json
+
+          DEPLOYMENT_ID="$(python3 - <<'PY'
+          import json
+          with open("deployment-response.json", "r", encoding="utf-8") as handle:
+              print(json.load(handle)["id"])
+          PY
+          )"
+          echo "deployment_id=${DEPLOYMENT_ID}" >> "$GITHUB_OUTPUT"
+
+      - name: Send deploy webhook to watchd
+        env:
+          DEPLOYMENT_ID: ${{ steps.deployment.outputs.deployment_id }}
+          RELEASE_VERSION: ${{ steps.tag.outputs.tag }}
+          IMAGE: ${{ env.IMAGE_NAME }}:latest
+          IMAGE_DIGEST: ${{ steps.build.outputs.digest }}
+          GITHUB_RUN_ID_VALUE: ${{ github.run_id }}
+        shell: bash
+        run: |
+          export WATCHD_URL
+          WATCHD_PATH="$(python3 - <<'PY'
+          import os
+          from urllib.parse import urlparse
+
+          parsed = urlparse(os.environ["WATCHD_URL"])
+          path = parsed.path or "/"
+          print(path)
+          PY
+          )"
+          EVENT_ID="$(uuidgen | tr '[:upper:]' '[:lower:]')"
+          export EVENT_ID
+
+          python3 - <<'PY' > payload.json
+          import json
+          import os
+          import sys
+
+          payload = {
+              "app_name": os.environ["APP_NAME"],
+              "source_sha": os.environ["GITHUB_SHA"],
+              "version": os.environ["RELEASE_VERSION"],
+              "image": os.environ["IMAGE"],
+              "image_digest": os.environ["IMAGE_DIGEST"],
+              "event_id": os.environ["EVENT_ID"],
+              "github": {
+                  "repository": os.environ["GITHUB_REPOSITORY"],
+                  "deployment_id": int(os.environ["DEPLOYMENT_ID"]),
+                  "environment": os.environ["DEPLOY_ENVIRONMENT"],
+                  "run_url": f'{os.environ["GITHUB_SERVER_URL"]}/{os.environ["GITHUB_REPOSITORY"]}/actions/runs/{os.environ["GITHUB_RUN_ID"]}',
+              },
+          }
+
+          production_url = os.environ.get("PRODUCTION_URL", "").strip()
+          if production_url:
+              payload["github"]["environment_url"] = production_url
+
+          if os.environ["GITHUB_EVENT_NAME"] == "workflow_dispatch":
+              payload["version"] = f'{os.environ["RELEASE_VERSION"]}+manual.{os.environ["GITHUB_RUN_ID_VALUE"]}'
+              payload.pop("source_sha", None)
+              payload.pop("image_digest", None)
+
+          sys.stdout.write(json.dumps(payload, separators=(",", ":")))
+          PY
+
+          BODY="$(cat payload.json)"
+
+          attempt=1
+          while [ "${attempt}" -le "${WEBHOOK_RETRY_ATTEMPTS}" ]; do
+            TIMESTAMP="$(date +%s)"
+            NONCE="$(uuidgen | tr '[:upper:]' '[:lower:]')"
+            CANONICAL="$(printf 'POST\n%s\n%s\n%s\n%s' \
+              "${WATCHD_PATH}" \
+              "${TIMESTAMP}" \
+              "${NONCE}" \
+              "${BODY}")"
+            SIGNATURE="sha256=$(printf '%s' "${CANONICAL}" | openssl dgst -sha256 -hmac "${WATCHD_SHARED_SECRET}" -hex | sed 's/^.* //')"
+
+            HTTP_STATUS="$(curl -sS \
+              -o webhook-response.txt \
+              -w '%{http_code}' \
+              -X POST \
+              -H "Content-Type: application/json" \
+              -H "X-Deploy-Timestamp: ${TIMESTAMP}" \
+              -H "X-Deploy-Nonce: ${NONCE}" \
+              -H "X-Deploy-Signature: ${SIGNATURE}" \
+              --data-binary @payload.json \
+              "${WATCHD_URL}")"
+
+            if [ "${HTTP_STATUS}" = "202" ] || [ "${HTTP_STATUS}" = "200" ]; then
+              echo "watchd accepted deploy request with status ${HTTP_STATUS}"
+              exit 0
+            fi
+
+            if [ "${HTTP_STATUS}" = "409" ] && [ "${attempt}" -lt "${WEBHOOK_RETRY_ATTEMPTS}" ]; then
+              echo "watchd busy for ${APP_NAME}, retrying in ${WEBHOOK_RETRY_DELAY_SECONDS}s (attempt ${attempt}/${WEBHOOK_RETRY_ATTEMPTS})"
+              sleep "${WEBHOOK_RETRY_DELAY_SECONDS}"
+              attempt=$((attempt + 1))
+              continue
+            fi
+
+            echo "watchd request failed with status ${HTTP_STATUS}"
+            cat webhook-response.txt
+            exit 1
+          done
+
+          echo "watchd remained busy for ${APP_NAME} after ${WEBHOOK_RETRY_ATTEMPTS} attempts"
+          exit 1
